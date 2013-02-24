@@ -1,0 +1,13 @@
+{
+  "name": "dp-api",
+  "version": "0.0.1",
+  "description": "RESTful API that serves JSON data for dp",
+  "private": true,
+  "repository": "",
+  "author": "Thomas Loh",
+  "license": "BSD",
+  "dependencies": {
+    "express": "3.x",
+    "mongoose": "~3.5.7"
+  }
+}
