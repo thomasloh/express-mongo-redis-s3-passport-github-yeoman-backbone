@@ -123,7 +123,7 @@ module.exports = function (grunt) {
                 imagesDir: '<%= yeoman.app %>/images',
                 javascriptsDir: '<%= yeoman.app %>/scripts',
                 fontsDir: '<%= yeoman.app %>/styles/fonts',
-                importPath: 'app/components',
+                importPath: ['app/components/compass-twitter-bootstrap/stylesheets_sass'],
                 relativeAssets: true
             },
             dist: {},
@@ -262,7 +262,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
-        'jshint',
+        // 'jshint',
         'test',
         'coffee',
         'compass:dist',

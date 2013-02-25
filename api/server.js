@@ -2,6 +2,9 @@ var express         = require('express'),
     config          = require('./config'),
     server          = express(),
     mongoose        = require('mongoose');
+    RedisStore      = require('connect-redis')(express),
+    passport        = require('passport'),
+    GitHubStrategy  = require('passport-github').Strategy;
 
 /*
  * ------------------------------
@@ -34,6 +37,40 @@ profile_schema.methods.imaged = function() {
 var Profile = mongoose.model('Profile', profile_schema);
 
 /*
+ * --------------------------------
+ * AUTHENTICATIONS
+ * --------------------------------
+ */
+ var GITHUB_CLIENT_ID = "81d79776accbbad7f1c6"
+ var GITHUB_CLIENT_SECRET = "9977e92222f72ae13dd96f759bb7932a60535ea4";
+
+ passport.serializeUser(function(user, done) {
+   done(null, user);
+ });
+
+ passport.deserializeUser(function(obj, done) {
+   done(null, obj);
+ });
+
+ passport.use(new GitHubStrategy({
+     clientID: GITHUB_CLIENT_ID,
+     clientSecret: GITHUB_CLIENT_SECRET,
+     callbackURL: "http://localhost:5000/auth/github/callback"
+   },
+   function(accessToken, refreshToken, profile, done) {
+     // asynchronous verification, for effect...
+     process.nextTick(function () {
+       
+       // To keep the example simple, the user's GitHub profile is returned to
+       // represent the logged-in user.  In a typical application, you would want
+       // to associate the GitHub account with a user record in your database,
+       // and return that user instead.
+       return done(null, profile);
+     });
+   }
+ ));
+
+/*
  * ------------------------------
  * EXPRESS CONFIGURATIONS
  * ------------------------------
@@ -44,11 +81,14 @@ server.set('port', config.port);
 server.set('api_prefix', '/dp/api/v1');
 server.use(express.logger());
 server.use(express.compress());
-server.use(express.methodOverride());
 server.use(express.bodyParser());
-// server.use(express.session({secret: 'jumping jacks'}));
-// server.use(passport.initialize());
-// server.use(passport.session());
+server.use(express.methodOverride());
+server.use(express.cookieParser());
+server.use(express.session({ store: new RedisStore, secret: 'oppa gangnam style!' , cookie: { secure: false, maxAge: 86400000 } }));
+// Initialize Passport!  Also use passport.session() middleware, to support
+// persistent login sessions (recommended).
+server.use(passport.initialize());
+server.use(passport.session());
 server.use(server.router);
 server.configure('developement', function() {
 })
@@ -58,78 +98,37 @@ server.configure('production', function() {
 ap = server.get('api_prefix');
 
 /*
- * --------------------------------
- * AUTHENTICATIONS
- * --------------------------------
- */
- // var GITHUB_CLIENT_ID = "81d79776accbbad7f1c6"
- // var GITHUB_CLIENT_SECRET = "9977e92222f72ae13dd96f759bb7932a60535ea4";
-
- // passport.serializeUser(function(user, done) {
- //   done(null, user);
- // });
-
- // passport.deserializeUser(function(obj, done) {
- //   done(null, obj);
- // });
-
- // passport.use(new GitHubStrategy({
- //     clientID: GITHUB_CLIENT_ID,
- //     clientSecret: GITHUB_CLIENT_SECRET,
- //     callbackURL: "http://localhost:5000/auth/github/callback/"
- //   },
- //   function(accessToken, refreshToken, profile, done) {
- //     // asynchronous verification, for effect...
- //     process.nextTick(function () {
-       
- //       // To keep the example simple, the user's GitHub profile is returned to
- //       // represent the logged-in user.  In a typical application, you would want
- //       // to associate the GitHub account with a user record in your database,
- //       // and return that user instead.
- //       return done(null, profile);
- //     });
- //   }
- // ));
-
- // server.get('/auth/github/',
- //   passport.authenticate('github'));
-
- // server.get('/auth/github/callback/',
- //   passport.authenticate('github', { failureRedirect: '/login' }),
- //   function(req, res) {
- //     // Successful authentication
- //   });
-
-
-/*
  * ---------------
  * API
- *
- *
- * req.body
- * req.params
- * req.param
- * req.get
- * res.json
- * 
  * ---------------
  */
 
 // Helpers
-function authenticated(req, res, next) {
-  // check redis store
-  // if (loggedIn) {
-  //   return next();
-  // } else {
-  //   res.send(404, 'Unauthenticated');
-  // }
+function authenticate(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    res.send(401);
+  }
 };
 
-// check auth
-// server.all('*', auth);
+// Allow cors
+server.all('/*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:5001");
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
+  res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
+  next();
+});
+
+// Handle preflight requests
+server.options('/*', function(req, res, next) {
+  console.log("Approving preflight request");
+  res.send(200);
+});
 
 // POST - create a new profile
-server.post(ap + '/p/', authenticated, function(req, res) {
+server.post(ap + '/p', authenticate, function(req, res) {
   console.log('Creating a new profile...');
 
   var name,
@@ -147,14 +146,15 @@ server.post(ap + '/p/', authenticated, function(req, res) {
   profile.save(function(err, profile) {
     if (err) {
       throw new Error('Problem creating profile.');
-    };
-    // Send back response
-    res.json(profile);
+    } else {
+      // Send back response
+      res.send(201);
+    }
   });
 });
 
 // GET - gets a profile
-server.get(ap + '/p/:id/', authenticated, function(req, res) {
+server.get(ap + '/p/:id', function(req, res) {
   console.log('Getting a profile')
 
   var id;
@@ -163,20 +163,21 @@ server.get(ap + '/p/:id/', authenticated, function(req, res) {
   id = req.param('id');
 
   // Grab profile
-  Profile.findById(id, authenticated, function(err, profile) {
+  Profile.findById(id, '-__v -_id', function(err, profile) {
     if (err) {
       res.json({
         error: 'Profile doesn\' exists'
       })
-    };
-    // Send back response
-    res.json(profile);
+    } else {
+      // Send back response
+      res.json(profile);
+    }
   });
 });
 
 
 // PUT - updates a profile
-server.put(ap + '/p/:id/', authenticated, function(req, res) {
+server.put(ap + '/p/:id', authenticate, function(req, res) {
   console.log('Updating a profile');
 
   var id, data;
@@ -191,17 +192,16 @@ server.put(ap + '/p/:id/', authenticated, function(req, res) {
       res.json({
         error: 'Profile doesn\' exists'
       })
-    };
-    res.send(200);
+    } else {
+      res.send(200);
+    }
   });
 
 });
 
 // DELETE - deletes a profile
-server.delete(ap + '/p/:id/', function(req, res) {
+server.delete(ap + '/p/:id', authenticate, function(req, res) {
   console.log('Deleting a profile')
-
-  // checks if 
 
   var id;
 
@@ -214,8 +214,9 @@ server.delete(ap + '/p/:id/', function(req, res) {
       res.json({
         error: 'Profile doesn\' exists'
       })
-    };
-    res.send(200);
+    } else {
+      res.send(200);
+    }
   });
 
 });
