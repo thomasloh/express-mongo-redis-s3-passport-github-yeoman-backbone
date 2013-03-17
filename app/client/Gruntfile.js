@@ -119,11 +119,11 @@ module.exports = function (grunt) {
         compass: {
             options: {
                 sassDir: '<%= yeoman.app %>/styles',
-                cssDir: '.tmp/styles',
+                cssDir: ['.tmp/styles', '<%= yeoman.app %>/styles'],
                 imagesDir: '<%= yeoman.app %>/images',
                 javascriptsDir: '<%= yeoman.app %>/scripts',
-                fontsDir: '<%= yeoman.app %>/styles/fonts',
-                importPath: ['app/components/compass-twitter-bootstrap/stylesheets_sass'],
+                fontsDir: '<%= yeoman.app %>/fonts',
+                importPath: ['app/components/foundation/scss', 'app/components/font-awesome/sass'],
                 relativeAssets: true
             },
             dist: {},

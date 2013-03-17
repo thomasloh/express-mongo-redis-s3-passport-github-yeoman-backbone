@@ -1,7 +1,400 @@
-<div class="profile">
+<div class="background">
+  <div class="overlay dark">
+    
+  </div>
+</div>
 
-  <h1 data-text="profile.name"></h1>
-  <h1 data-text="profile.company"></h1>
-  <h1 data-text="profile.location"></h1>
+<!-- Edit button -->
+<div class="edit-panel dark">
+  <i class="icon-edit icon-2x"></i>
+  <i class="icon-ok icon-2x"></i>
+</div>
+
+<!-- View mode -->
+<div class="view-mode dark">
+  <span class="minimal">minimal</span>
+  <span class="detailed active">detailed</span>
+</div>
+
+<!-- Theme. only for this user -->
+<div class="theme dark">
+  <span class="light">light</span>
+  <span class="dark active">dark</span>
+</div>
+
+
+<!-- Minimal -->
+<!-- ================================================================================ -->
+
+<div class="profile minimal dark hide">
+
+  <div class="row">
+
+    <div class="large-12 columns name">
+
+      <!-- <span class="name" data-dp-text="model.name"></span> -->
+
+    </div>
+    
+  </div>
+
+  <div class="row">
+
+    <div class="large-6 columns">
+
+      <img class="th profile-pic" data-dp-src="model.github_data._json.avatar_url" alt="profile-image">
+
+    </div>
+
+    <div class="large-6 columns">
+
+      <p>
+        <div class="row minimal-section">
+          <div class="large-2 columns icon-col">
+            <i class="icon-user icon-4x"></i>
+          </div>
+          <div class="large-9 columns minimal-info">
+            <span class="name" data-dp-text="model.name"></span>
+          </div>
+        </div>
+      </p>
+
+      <p class="role">
+        <div class="row minimal-section">
+          <div class="large-2 columns icon-col">
+            <i class="icon-suitcase icon-4x"></i>
+          </div>
+          <div class="large-9 columns minimal-info">
+            <span class="role" data-dp-text="model.position"></span>
+            <span>,</span>
+            <span class="role" data-dp-text="model.company"></span>
+          </div>
+        </div>
+      </p>
+
+      <p>
+        <div class="row minimal-section">
+          <div class="large-2 columns icon-col">
+            <i class="icon-bolt icon-4x"></i>
+          </div>
+          <div class="large-9 columns minimal-info">
+            <span class="specialty" data-dp-text="model.specialty"></span>
+          </div>
+        </div>
+      </p>
+
+      <p>
+        <div class="row minimal-section">
+          <div class="large-2 columns icon-col">
+            <i class="icon-globe icon-4x"></i>
+          </div>
+          <div class="large-9 columns minimal-info">
+            <span class="location" data-dp-text="model.location"></span>
+          </div>
+        </div>
+      </p>
+
+    </div>
+    
+  </div>
   
 </div>
+
+<!-- Detailed -->
+<!-- ================================================================================ -->
+
+
+<div class="profile detailed dark">
+
+  <div class="large-4 columns sidebar">
+
+    <img class="th profile-pic" data-dp-src="model.github_data._json.avatar_url" alt="profile-image">
+
+    <br>
+
+    <br>
+
+    <br>
+
+    <!-- About -->
+    <!-- ================================================================================ -->
+
+    <div class="panel radius">
+
+      <h1 class="minimal-header">About</h1>
+
+      <p>
+        <div class="row minimal-section">
+          <div class="large-3 columns icon-col">
+            <i class="icon-user icon-2x"></i>
+          </div>
+          <div class="large-9 columns minimal-info model-view">
+            <span class="view minimal" data-dp-text="model.name"></span>
+            <input type="text" class="edit minimal" data-dp-value="model.name">
+          </div>
+        </div>
+      </p>
+
+      <p class="role">
+        <div class="row minimal-section">
+          <div class="large-3 columns icon-col">
+            <i class="icon-suitcase icon-2x"></i>
+          </div>
+          <div class="large-9 columns minimal-info model-view">
+            <span class="role minimal view" data-dp-text="model.position"></span>
+            <input type="text" class="edit minimal" data-dp-value="model.position">
+          </div>
+        </div>
+      </p>
+
+      <p class="role">
+        <div class="row minimal-section">
+          <div class="large-3 columns icon-col">
+            <i class="icon-home icon-2x"></i>
+          </div>
+          <div class="large-9 columns minimal-info model-view">
+            <span class="role view minimal" data-dp-text="model.company"></span>
+            <input type="text" class="edit minimal" data-dp-value="model.company">
+          </div>
+        </div>
+      </p>
+
+      <p>
+        <div class="row minimal-section">
+          <div class="large-3 columns icon-col">
+            <i class="icon-bolt icon-2x"></i>
+          </div>
+          <div class="large-9 columns minimal-info model-view">
+            <span class="view minimal specialty" data-dp-text="model.specialty"></span>
+            <input type="text" class="edit minimal" data-dp-value="model.specialty">
+          </div>
+        </div>
+      </p>
+
+      <p>
+        <div class="row minimal-section">
+          <div class="large-3 columns icon-col">
+            <i class="icon-globe icon-2x"></i>
+          </div>
+          <div class="large-9 columns minimal-info model-view">
+            <span class="view minimal location" data-dp-text="model.location"></span>
+            <input type="text" class="edit minimal" data-dp-value="model.location">
+          </div>
+        </div>
+      </p>
+
+    </div>
+
+    <!-- Contact -->
+    <!-- ================================================================================ -->
+
+    <div class="panel radius">
+
+      <h1 class="minimal-header">Contact</h1>
+
+      <p>
+        <div class="row minimal-section">
+          <div class="large-3 columns icon-col">
+            <i class="icon-envelope icon-2x"></i>
+          </div>
+          <div class="large-9 columns minimal-info model-view">
+            <span class=" view minimal email" data-dp-text="model.email"></span>
+            <input type="text" class="edit minimal" data-dp-value="model.email">
+          </div>
+        </div>
+      </p>
+      <p>
+        <div class="row minimal-section">
+          <div class="large-3 columns icon-col">
+            <i class="icon-twitter icon-2x"></i>
+          </div>
+          <div class="large-9 columns minimal-info model-view">
+            <span class="view minimal twitter" data-dp-text="model.twitter"></span>
+            <input type="text" class="edit minimal" data-dp-value="model.twitter">
+          </div>
+        </div>
+      </p>
+      <p>
+        <div class="row minimal-section">
+          <div class="large-3 columns icon-col">
+            <i class="icon-github icon-2x"></i>
+          </div>
+          <div class="large-9 columns minimal-info model-view">
+            <a data-dp-href="model.github_data._json.html_url" target="_blank">
+              <span class="email" data-dp-text="model.github_data._json.login"></span>
+            </a>
+          </div>
+        </div>
+      </p>
+      <p>
+        <div class="row minimal-section">
+          <div class="large-3 columns icon-col">
+            <i class="icon-bookmark icon-2x"></i>
+          </div>
+          <div class="large-9 columns minimal-info model-view">
+            <a data-dp-href="model.github_data._json.blog | link" target="_blank">
+              <span class="email" data-dp-text="model.github_data._json.blog"></span>
+            </a>
+          </div>
+        </div>
+      </p>
+      
+    </div>
+
+  </div>
+
+  <div class="large-8 columns">
+
+    <div class="row">
+
+      <div class="large-12 columns">
+
+        <!-- Quick -->
+        <!-- ================================================================================ -->
+        <div class="summary model-view">
+          <!-- View -->
+          <div class="panel radius callout">
+            <input type="text" data-dp-value="model.summary" disabled class="view">
+            <input class="edit" type="text" data-dp-value="model.summary" placeholder="You in a short sentence">
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+    <div class="row">
+
+      <div class="large-12 columns">
+
+        <!-- Experiences -->
+        <!-- ================================================================================ -->
+
+        <fieldset class="model-view experiences">
+          <legend>Experiences</legend>
+          <!-- PREVIEW -->
+          <div class="row preview" data-dp-each-experience="model.experiences">
+
+            <div class="large-5 columns added">
+              <h5 data-dp-text="experience:position">
+              </h5>
+            </div>
+
+            <div class="large-6 columns added">
+              <h5 data-dp-text="experience:company">
+              </h5>
+            </div>
+            <div class="large-1 columns action">
+              <i class="icon-minus icon-2x del-exp del" data-dp-position="experience:position" data-dp-company="experience:company"></i>
+            </div>
+
+          </div>
+          <!-- EDIT -->
+          <div class="row experiences edit-area">
+            <div class="large-5 columns">
+              <input type="text" class="pos" placeholder="Position">
+            </div>
+            <div class="large-6 columns">
+              <input type="text" class="com" placeholder="Company">
+            </div>
+            <div class="large-1 columns action">
+              <i class="icon-plus icon-2x add-exp add"></i>
+            </div>
+          </div>
+        </fieldset>
+
+      </div>
+      
+    </div>
+
+    <div class="row">
+
+      <div class="large-12 columns">
+
+        <!-- Projects -->
+        <!-- ================================================================================ -->
+
+        <!-- VIEW -->
+        <fieldset class="model-view projects">
+          <legend>Projects</legend>
+          <!-- PREVIEW -->
+          <div class="preview" data-dp-each-project="model.projects">
+
+            <div class="row">
+              <div class="large-11 columns added">
+                <h5 data-dp-text="project:name">
+                </h5>
+              </div>
+
+              <div class="large-1 columns added action">
+                <i class="icon-minus icon-2x del-proj del" data-dp-name="project:name" data-dp-desc="project:desc"></i>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns added">
+                <span data-dp-text="project:desc"></span>
+              </div>
+            </div>
+
+          </div>
+          <!-- EDIT -->
+          <div class="row projects edit-area">
+            <div class="large-11 columns">
+              <input type="text" class="proj-name" placeholder="Name">
+            </div>
+            <div class="large-1 columns action">
+              <i class="icon-plus icon-2x add-proj add"></i>
+            </div>
+          </div>
+          <div class="row projects edit-area">
+            <div class="large-11 columns">
+              <input type="text" class="proj-desc" placeholder="Simple description">
+            </div>
+          </div>
+        </fieldset>
+
+      </div>
+      
+    </div>
+    <div class="row">
+
+      <div class="large-12 columns">
+
+        <!-- Interests -->
+        <!-- ================================================================================ -->
+
+        <fieldset class="model-view interests">
+          <legend>Interests</legend>
+          <!-- PREVIEW -->
+          <div class="preview" data-dp-each-interest="model.interests">
+
+            <div class="row">
+              <div class="large-11 columns added">
+                <h5 data-dp-text="interest:name">
+                </h5>
+              </div>
+
+              <div class="large-1 columns added action">
+                <i class="icon-minus icon-2x del-interest del" data-dp-name="interest:name"></i>
+              </div>
+            </div>
+
+          </div>
+          <!-- EDIT -->
+          <div class="row interests edit-area">
+            <div class="large-11 columns">
+              <input type="text" class="interest-name" placeholder="Interest">
+            </div>
+            <div class="large-1 columns action">
+              <i class="icon-plus icon-2x add-interest add"></i>
+            </div>
+          </div>
+        </fieldset>
+
+      </div>
+      
+    </div>
+
+  </div>
+  
+</div>
+

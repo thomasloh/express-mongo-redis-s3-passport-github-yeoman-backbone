@@ -1,7 +1,7 @@
 define(['profile'], function(Profile) {
   var Profiles = Backbone.Collection.extend({
     model: Profile,
-    initialize: function(opts) {
+    initialize: function(models, opts) {
       // precaution
       opts || (opts = {})
 

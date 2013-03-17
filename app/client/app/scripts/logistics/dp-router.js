@@ -17,20 +17,25 @@ define(['_page', 'home', 'view', 'profiles'], function(_Page, Home, View, Profil
       // grab options
       this.config = opts.config;
 
+      // grab auth
+      this.auth = opts.auth;
+
       // A view holder
       this.page = new _Page({
         selector: '#main'
       });
 
       // Profile collection
-      this.profiles = new Profiles({
+      this.profiles = new Profiles([], {
         api_root: this.config.api_root
       });
+
     },
 
     // Home
     home: function() {
-      var home = new Home();
+      var user = this.profiles.retrieve(this.auth.get('user')._id);
+      var home = new Home({model: user});
       this.page.show(home)
     },
 

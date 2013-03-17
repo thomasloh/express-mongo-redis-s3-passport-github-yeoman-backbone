@@ -4,12 +4,17 @@
   "dependencies": {
     "requirejs": "~2.1.4",
     "modernizr": "~2.6.2",
-    "jquery": "~1.9.1",
-    "backbone": "~0.9.10",
+    "backbone": "~0.9.9",
     "underscore": "~1.4.4",
     "compass-twitter-bootstrap": "~2.2.2",
     "requirejs-text": "~2.0.5",
-    "rivets": "~0.4.5"
+    "rivets": "~0.4.5",
+    "foundation": "~4.0.3",
+    "font-awesome": "~3.0.2",
+    "jquery-transition": "latest",
+    "jquery": "~1.9.1",
+    "skrollr": "~0.3.0",
+    "jquery-waypoints": "~v2.0.2"
   },
   "devDependencies": {}
 }

@@ -27,7 +27,7 @@ define(['text!_page.html'], function(page_template) {
 
   var Page = Backbone.View.extend({
 
-    id: 'Page',
+    id: 'page',
     template: _.template(page_template),
     initialize: function(opts) {
 
@@ -47,6 +47,7 @@ define(['text!_page.html'], function(page_template) {
     // Append this layout
     attach: function() {
       var $main = $(this.selector);
+      $main.empty();
       this.setElement($main);
       $main.append(this.template());
     },
@@ -57,7 +58,7 @@ define(['text!_page.html'], function(page_template) {
       this.$('#container').empty().append(view.html());
       // Event bindings, if any
       if (view.model) {
-        rivets.bind(view.$el, {profile: view.model});
+        rivets.bind(view.$el, {model: view.model});
       };
       // Any postShows
       view.postShow();

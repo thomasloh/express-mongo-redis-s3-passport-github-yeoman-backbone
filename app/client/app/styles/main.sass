@@ -1,20 +1,284 @@
 // Styles
 
-@import "compass_twitter_bootstrap"
-// @import "../components/compass-twitter-bootstrap/stylesheets_sass/compass_twitter_bootstrap_awesome"
-// @import "../components/compass-twitter-bootstrap/stylesheets_sass/compass_twitter_bootstrap_responsive"
+@import "foundation.scss"
+@import "font-awesome.sass"
+@import "compass"
 
+*
+  -webkit-transition: all 0.7s
+  -moz-transition: all 0.7s
+  transition: all 0.7s
+
+// Overrides
+.panel
+  background: rgba(255, 255, 255, 0.85)
+
+// Detaild.co
 body
-  background: url('../images/light_wool.png')
-
+  // background: url('../images/debut_light.png')
+  // background: #F4F4F4
   h1, h2, h3, h4, h5
     font-family: 'Lato', sans-serif
     font-weight: 300
+  
+  #unauthenticated
+    position: fixed
+    left: 35%
+    top: 40%
+    width: 35%
 
   #main
     position: relative
     height: 100%
     width: 100%
+
+    .logout
+      margin-top: 2em
+      float: right
+    #view
+      .background
+        // background: url('../images/google.jpg') no-repeat
+        background: url('../images/trapit.png') no-repeat
+        background-size: cover
+        position: fixed
+        z-index: -1
+        top: 0
+        bottom: 0
+        left: 0
+        right: 0
+        width: 100%
+        height: 100%
+        .overlay
+          background-size: cover
+          position: fixed
+          z-index: 1
+          top: 0
+          bottom: 0
+          left: 0
+          right: 0
+          width: 100%
+          height: 100%
+          &.light
+            background: rgb(255, 255, 255)
+            opacity: 0.7
+          &.dark
+            background: rgb(1, 2, 3)
+            opacity: 0.6
+      .edit-panel
+        position: fixed
+        right: 2.5em
+        top: 1.4em
+        .icon-ok
+          display: none
+          color: green
+          &:hover
+            color: rgb(23, 241, 23)
+        &.dark
+          .icon-edit
+            color: rgb(100, 100, 100)
+            &:hover
+              color: rgb(255, 255, 255)
+          // needs latest Compass, add '@import "compass"' to your scss
+          // @include filter-gradient(#00000000, #a6000000, horizontal); // IE6-9
+          // @include background-image(linear-gradient(left,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%))
+        &.light
+          .icon-edit
+            &:hover
+              color: rgb(255, 255, 255)
+          // needs latest Compass, add '@import "compass"' to your scss
+          // @include filter-gradient(#00ffffff, #ffffff, horizontal); // IE6-9
+          // @include background-image(linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%))
+      .view-mode, .theme
+        position: fixed
+        top: 0
+        right: 0
+        margin-top: 2%
+        margin-right: 10%
+        span
+          cursor: default
+          font-family: 'Lato', sans-serif
+          font-weight: 200
+          font-style: normal
+          opacity: 0.5
+          font-size: 1.2em
+        &.light
+          span
+            color: rgb(162, 162, 162)
+            &:hover
+              color: rgb(50, 50, 50)
+              opacity: 1
+            &.active
+              color: rgb(50, 50, 50)
+              border-bottom: 3px solid rgb(17, 196, 241)
+              padding-bottom: 0.3em
+        &.dark
+          span
+            color: rgb(180, 180, 180)
+            &:hover
+              color: rgb(255, 255, 255)
+              opacity: 1
+            &.active
+              color: rgb(235, 235, 235)
+              border-bottom: 3px solid rgb(17, 196, 241)
+              padding-bottom: 0.3em
+      .theme
+        margin-right: 25%
+      .profile
+        .model-edit, .model-view
+          border: none
+          legend
+            background: transparent
+            color: rgb(194, 191, 191)
+            font-size: 2em
+            font-weight: 300
+            font-family: "proxima-nova",sans-serif
+          .preview
+            margin-bottom: 1em
+          input
+            box-shadow: none
+            padding: 0
+            -webkit-box-shadow: none
+            font-size: 1em
+            background: transparent
+            border: none
+            color: white
+            display: inline-block
+            font-weight: 300
+            font-family: "proxima-nova",sans-serif
+          .action
+            i
+              color: white
+              float: right
+              &.del
+                color: rgb(114, 111, 114)
+                &:hover
+                  color: red
+              &.add
+                margin-top: 0.4em
+                color: rgb(114, 111, 114)
+                &:hover
+                  color: white
+          .added
+            h5
+              color: white
+              display: inline
+        .model-view
+          .edit
+            display: none
+          .view
+            font-size: 1.6875em
+            font-weight: 300
+            margin: 0
+            &.minimal
+              font-size: 1em
+          .action, .edit-area
+            opacity: 0
+        .model-edit
+          .edit
+            font-size: 1.6875em
+            &.minimal
+              margin: -1em 0 0 0
+              font-size: 1em
+              font-weight: 300
+              color: rgb(34, 34, 34)
+              line-height: 16px
+              height: 100%
+              box-sizing: border-box
+          .view
+            display: none
+        .minimal-header
+          color: rgb(109, 109, 109)
+        .minimal-section
+          -webkit-transition: all 0.3s
+          -moz-transition: all 0.3s
+          transition: all 0.3s
+        .icon-col
+          text-align: center
+          top: -0.4em
+          .icon-twitter
+            color: rgb(63, 209, 255)
+          .icon-github
+            color: rgb(100, 97, 97)
+          .icon-envelope
+            color: rgb(177, 181, 182)
+          .icon-bolt
+            color: rgb(255, 173, 0)
+          .icon-bookmark
+            color: white
+          .icon-home
+            color: rgb(94, 7, 7)
+          .icon-globe
+            color: green
+          .icon-suitcase
+            color: rgb(163, 80, 14)
+          .icon-user
+            color: rgb(68, 66, 66)
+        span
+          cursor: default
+          font-family: "proxima-nova",sans-serif
+          font-weight: 300
+          font-style: normal
+          font-size: 1em
+          display: inline
+        .name
+          font-family: "proxima-nova", sans-serif
+          font-weight: 300
+          font-size: 1.1em
+        &.detailed
+          margin-top: 4em
+          opacity: 1
+          h5
+            font-weight: 400
+          &.dark
+            .preview
+              color: rgb(100, 100, 100)
+            .added
+              color: rgb(158, 156, 156)
+          &.light
+            legend
+              color: rgb(140, 140, 140)
+            .added
+              h5, span
+                color: rgb(80, 80, 80)
+        &.minimal
+          margin-top: 10em
+          &.dark
+            .minimal-section
+              i
+                color: rgb(230, 230, 230)
+              span
+                color: rgb(200, 200, 200)
+              &:hover
+                i
+                  color: rgb(63, 209, 255)
+                span
+                  color: rgb(255, 255, 255)
+          &.light
+            .minimal-section
+              i
+                color: rgb(50, 50, 50)
+              span
+                color: rgb(80, 80, 80)
+              &:hover
+                i
+                  color: rgb(63, 209, 255)
+                span
+                  color: rgb(10, 10, 10)
+          .profile-pic
+            margin-top: 4em
+          .minimal-info
+            padding-top: 1em
+          span
+            font-size: 1.8em
+            font-weight: 400
+          .name
+            font-size: 2.5em
+            font-weight: 400
+          p
+            margin-top: 4em
+            margin-bottom: 4em
+
+
 
 
 

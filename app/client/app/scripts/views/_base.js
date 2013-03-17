@@ -11,15 +11,22 @@ define([], function() {
       // grab model
       this.model = opts.model || false;
 
+      // grab auth
+      this.auth = opts.auth || false;
+
     },
 
     html: function() {
-      $(this.el).html(this.template());
+      $(this.el).html(this.template(this.serialize()));
       return this.el;
     },
 
     postShow: function() {
       
+    },
+
+    serialize: function() {
+      return {};
     }
 
   });
