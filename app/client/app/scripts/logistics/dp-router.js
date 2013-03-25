@@ -34,16 +34,44 @@ define(['_page', 'home', 'view', 'profiles'], function(_Page, Home, View, Profil
 
     // Home
     home: function() {
-      var user = this.profiles.retrieve(this.auth.get('user')._id);
-      var home = new Home({model: user});
-      this.page.show(home)
+
+      if (this.auth.get('loggedIn')) {
+        var user = this.profiles.retrieve({id: this.auth.get('user')._id});
+        Backbone.history.navigate('/' + user.get('username'), true);
+      } else {
+        $('body').addClass('unauth');
+      }
     },
 
     // View a profile
-    view: function(id) {
-      var model = this.profiles.retrieve(id);
-      var view = new View({model: model});
-      this.page.show(view);
+    view: function(username) {
+
+      function cont() {
+        $('body').removeClass('unauth');
+        var model = this.profiles.retrieve({username: username});
+        if (model) {
+          var view = new View({model: model, auth: this.auth});
+          this.page.show(view);
+        } else {
+          Backbone.history.navigate('/', true);
+        }
+      };
+      var _this = this;
+      if (!this.auth.get('loggedIn')) {
+        var model = this.profiles.retrieve({username: username});
+        model.fetch({
+          success: function(p) {
+            if (p.get('msg') === "Profile doesn't exist") {
+              Backbone.history.navigate('/', true);
+            } else {
+              cont.call(_this);
+            }
+          }
+        })
+      } else {
+        cont.call(this);
+      }
+
     }
 
   });

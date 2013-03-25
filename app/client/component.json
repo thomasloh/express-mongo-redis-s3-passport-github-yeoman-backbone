@@ -14,7 +14,8 @@
     "jquery-transition": "latest",
     "jquery": "~1.9.1",
     "skrollr": "~0.3.0",
-    "jquery-waypoints": "~v2.0.2"
+    "jquery-waypoints": "~v2.0.2",
+    "animate.css": "latest"
   },
   "devDependencies": {}
 }

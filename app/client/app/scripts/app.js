@@ -46,6 +46,7 @@ define(['router', 'auth'], function (Router, Auth) {
                 _auth.getAuth({
 
                     loggedIn: function() {
+                        $('body').removeClass('unauth');
 
                         // Starts pushstate
                         Backbone.history.start({
@@ -77,7 +78,7 @@ define(['router', 'auth'], function (Router, Auth) {
                     },
 
                     notLoggedIn: function() {
-                        $('#unauthenticated').show();
+                        $('body').addClass('unauth');
                     }
 
                 });

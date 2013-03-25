@@ -13,7 +13,7 @@ define(['_base_view', 'text!home.html'], function(BaseView, home_template) {
 
     serialize: function() {
       return {
-        id: this.model.id
+        username: this.model.get('github_data').username
       };
     }
 

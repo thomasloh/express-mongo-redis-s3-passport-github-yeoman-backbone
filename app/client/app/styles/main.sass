@@ -5,40 +5,102 @@
 @import "compass"
 
 *
-  -webkit-transition: all 0.7s
-  -moz-transition: all 0.7s
-  transition: all 0.7s
+  -webkit-transition: color 0.5s
+  -moz-transition: color 0.5s
+  transition: color 0.5s
+  -webkit-transition: opacity 0.5s
+  -moz-transition: opacity 0.5s
+  transition: opacity 0.5s
 
 // Overrides
 .panel
   background: rgba(255, 255, 255, 0.85)
 
+
 // Detaild.co
 body
-  // background: url('../images/debut_light.png')
-  // background: #F4F4F4
+  .panel.callout
+    input
+      ::-webkit-input-placeholder
+        color: rgb(255, 255, 255)
+      ::-moz-placeholder
+        color: rgb(255, 255, 255)
+      ::-moz-placeholder
+        color: rgb(255, 255, 255)
+      ::-ms-input-placeholder
+        color: rgb(255, 255, 255)
   h1, h2, h3, h4, h5
     font-family: 'Lato', sans-serif
     font-weight: 300
-  
   #unauthenticated
-    position: fixed
-    left: 35%
-    top: 40%
-    width: 35%
+    display: none
 
+  &.unauth
+    background: url('../images/marin.png')
+    background-size: cover
+    #unauthenticated
+      .overlay
+        position: fixed
+        top: 0
+        bottom: 0
+        right: 0
+        left: 0
+        background: black
+        opacity: 0.7
+      .button
+        z-index: 5
+        // margin: 0
+        // border-radius: 8px
+        // -webkit-transition: all 200ms ease-out
+        // -moz-transition: all 200ms ease-out
+        // transition: all 200ms ease-out
+        // -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset
+        // box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset
+      // &:hover
+      //   .button
+      //     color: rgb(50, 50, 50)
+      //     background: rgb(50, 50, 50)
+      //   span, i
+      //     color: white
+      span
+        font-size: 2.6em
+        font-family: "Lato", sans-serif
+        font-weight: 400
+        top: -0.2em
+        position: relative
+        color: white
+      display: block
+      position: fixed
+      left: 35%
+      top: 40%
+      width: 35%
+      .msg
+        top: -3em
+        position: absolute
+        font-size: 2.5em
+        font-family: "raleway", sans-serif
+        width: 20em
+        text-align: center
+        margin-left: -4em
+      h1
+        top: 0
+        left: 1em
+        position: fixed
+        font-weight: 700
+        font-family: "museo-slab", serif
+        color: white
   #main
     position: relative
     height: 100%
     width: 100%
-
     .logout
       margin-top: 2em
       float: right
     #view
+      .exp-proj-int
+        margin-top: 2em
       .background
-        // background: url('../images/google.jpg') no-repeat
-        background: url('../images/trapit.png') no-repeat
+        background-repeat: no-repeat
         background-size: cover
         position: fixed
         z-index: -1
@@ -49,6 +111,9 @@ body
         width: 100%
         height: 100%
         .overlay
+          -webkit-transition: background 0.7s
+          -moz-transition: background 0.7s
+          transition: background 0.7s
           background-size: cover
           position: fixed
           z-index: 1
@@ -64,36 +129,91 @@ body
           &.dark
             background: rgb(1, 2, 3)
             opacity: 0.6
-      .edit-panel
+      .signout
         position: fixed
-        right: 2.5em
-        top: 1.4em
-        .icon-ok
-          display: none
-          color: green
-          &:hover
-            color: rgb(23, 241, 23)
+        right: 1.3%
+        top: 1.6em
+        .icon-signout
+          display: block
+          text-align: center
+        &:hover
+          span
+            opacity: 1
+        span
+          opacity: 0
+          -webkit-transition: opacity 0.5s
+          -moz-transition: opacity 0.5s
+          transition: opacity 0.5s
+          font-size: 1em
+          text-align: center
         &.dark
-          .icon-edit
-            color: rgb(100, 100, 100)
+          span
+            color: rgb(180, 180, 180)
+          .icon-signout
+            color: rgb(180, 180, 180)
             &:hover
               color: rgb(255, 255, 255)
           // needs latest Compass, add '@import "compass"' to your scss
           // @include filter-gradient(#00000000, #a6000000, horizontal); // IE6-9
           // @include background-image(linear-gradient(left,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%))
         &.light
+          span
+            color: rgb(162, 162, 162)
+          .icon-signout
+            color: rgb(162, 162, 162)
+            &:hover
+              color: rgb(50, 50, 50)
+      .edit-panel
+        position: fixed
+        right: 7%
+        top: 1.6em
+        .icon-edit
+          display: block
+          text-align: center
+        &:hover
+          span
+            opacity: 1
+        span
+          opacity: 0
+          display: block
+          -webkit-transition: opacity 0.5s
+          -moz-transition: opacity 0.5s
+          transition: opacity 0.5s
+          font-size: 1em
+          text-align: center
+        .icon-ok
+          display: none
+          color: green
+          &:hover
+            color: rgb(23, 241, 23)
+        .edit-ok
+          display: none
+        &.dark
+          span
+            color: rgb(180, 180, 180)
           .icon-edit
+            color: rgb(180, 180, 180)
             &:hover
               color: rgb(255, 255, 255)
           // needs latest Compass, add '@import "compass"' to your scss
+          // @include filter-gradient(#00000000, #a6000000, horizontal); // IE6-9
+          // @include background-image(linear-gradient(left,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%))
+        &.light
+          span
+            color: rgb(162, 162, 162)
+          .icon-edit
+            color: rgb(162, 162, 162)
+            &:hover
+              color: rgb(50, 50, 50)
+          // needs latest Compass, add '@import "compass"' to your scss
           // @include filter-gradient(#00ffffff, #ffffff, horizontal); // IE6-9
           // @include background-image(linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%))
-      .view-mode, .theme
+      .view-mode, .theme, .learn-more, .change-bg
         position: fixed
         top: 0
         right: 0
         margin-top: 2%
-        margin-right: 10%
+        margin-right: 13%
         span
           cursor: default
           font-family: 'Lato', sans-serif
@@ -102,7 +222,7 @@ body
           opacity: 0.5
           font-size: 1.2em
         &.light
-          span
+          span, h3
             color: rgb(162, 162, 162)
             &:hover
               color: rgb(50, 50, 50)
@@ -112,7 +232,7 @@ body
               border-bottom: 3px solid rgb(17, 196, 241)
               padding-bottom: 0.3em
         &.dark
-          span
+          span, h3
             color: rgb(180, 180, 180)
             &:hover
               color: rgb(255, 255, 255)
@@ -121,6 +241,54 @@ body
               color: rgb(235, 235, 235)
               border-bottom: 3px solid rgb(17, 196, 241)
               padding-bottom: 0.3em
+      .learn-more
+        position: fixed
+        top: auto
+        right: 0
+        bottom: 0
+        margin-right: 3%
+        margin-bottom: 1em
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
+        -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
+        background: rgba(54, 53, 53, 0.8)
+        border-radius: 0.2em
+        width: 1.8em
+        height: 2em
+        text-align: center
+        i
+          color: white
+        &:hover
+          background: rgba(255, 255, 255, 0.8)
+          i
+            color: rgb(30, 30, 30)
+      .change-bg
+        margin-right: 27%
+        &.light
+          span
+            color: rgb(162, 162, 162)
+            &:hover
+              color: rgb(50, 50, 50)
+        &.dark
+          span
+            color: rgb(180, 180, 180)
+            &:hover
+              color: rgb(255, 255, 255)
+      .home
+        position: fixed
+        top: -0.5em
+        left: 0
+        margin-left: 3em
+        &.dark
+          h1
+            font-weight: 700
+            font-family: "museo-slab",serif
+            color: rgb(250,250,250)
+        &.light
+          h1
+            font-weight: 700
+            font-family: "museo-slab",serif
+            color: rgb(60, 60, 60)
       .theme
         margin-right: 25%
       .profile
@@ -132,8 +300,6 @@ body
             font-size: 2em
             font-weight: 300
             font-family: "proxima-nova",sans-serif
-          .preview
-            margin-bottom: 1em
           input
             box-shadow: none
             padding: 0
@@ -143,43 +309,57 @@ body
             border: none
             color: white
             display: inline-block
-            font-weight: 300
+            font-weight: 400
             font-family: "proxima-nova",sans-serif
-          .action
-            i
-              color: white
-              float: right
-              &.del
-                color: rgb(114, 111, 114)
-                &:hover
-                  color: red
-              &.add
-                margin-top: 0.4em
-                color: rgb(114, 111, 114)
-                &:hover
-                  color: white
+          .preview
+            margin-top: 0.5em
+            margin-bottom: 1em
           .added
+            span
+              color: rgb(220, 220, 220)
+              font-weight: 500
+              margin-left: 1em
             h5
               color: white
               display: inline
+            &.dash
+              padding-top: 0.4em
+              h5
+                color: rgb(150, 150, 150)
         .model-view
           .edit
             display: none
+          .added
+            .preview-view
+              display: block
+              font-size: 1.2em
+              font-family: "proxima-nova", sans-serif
+            .preview-edit
+              display: none
           .view
             font-size: 1.6875em
-            font-weight: 300
+            font-weight: 400
             margin: 0
             &.minimal
               font-size: 1em
           .action, .edit-area
             opacity: 0
         .model-edit
+          .added
+            .preview-view
+              display: none
+            .preview-edit
+              margin: 0
+              padding: 0
+              display: block
+              font-family: "proxima-nova", sans-serif
+              font-size: 1.2em
           .edit
             font-size: 1.6875em
             &.minimal
               margin: -1em 0 0 0
               font-size: 1em
-              font-weight: 300
+              font-weight: 400
               color: rgb(34, 34, 34)
               line-height: 16px
               height: 100%
@@ -193,79 +373,170 @@ body
           -moz-transition: all 0.3s
           transition: all 0.3s
         .icon-col
+          i
+            -webkit-transition: color 0.5s
+            -moz-transition: color 0.5s
+            transition: color 0.5s
           text-align: center
-          top: -0.4em
-          .icon-twitter
+          .icon-twitter:hover
             color: rgb(63, 209, 255)
-          .icon-github
+          .icon-github:hover
             color: rgb(100, 97, 97)
-          .icon-envelope
+          .icon-envelope:hover
             color: rgb(177, 181, 182)
-          .icon-bolt
+          .icon-bolt:hover
             color: rgb(255, 173, 0)
-          .icon-bookmark
-            color: white
-          .icon-home
+          .icon-bookmark:hover
+            color: rgb(199, 48, 48)
+          .icon-home:hover
             color: rgb(94, 7, 7)
-          .icon-globe
+          .icon-globe:hover
             color: green
-          .icon-suitcase
-            color: rgb(163, 80, 14)
-          .icon-user
+          .icon-suitcase:hover
+            color: rgb(0, 214, 255)
+          .icon-user:hover
             color: rgb(68, 66, 66)
+          a
+            color: black
         span
           cursor: default
           font-family: "proxima-nova",sans-serif
-          font-weight: 300
+          font-weight: 400
           font-style: normal
           font-size: 1em
           display: inline
         .name
           font-family: "proxima-nova", sans-serif
-          font-weight: 300
+          font-weight: 400
           font-size: 1.1em
         &.detailed
           margin-top: 4em
           opacity: 1
           h5
             font-weight: 400
+          .chg-prof-pic
+            -webkit-transition: color 0.5s
+            -moz-transition: color 0.5s
+            transition: color 0.5s
+
           &.dark
+            ::-webkit-input-placeholder
+              color: rgb(255, 255, 255)
+            ::-moz-placeholder
+              color: rgb(255, 255, 255)
+            ::-moz-placeholder
+              color: rgb(255, 255, 255)
+            ::-ms-input-placeholder
+              color: rgb(255, 255, 255)
+            .chg-prof-pic
+              color: rgb(150, 150, 150)
+              &:hover
+                color: rgb(255, 255, 255)
             .preview
               color: rgb(100, 100, 100)
             .added
               color: rgb(158, 156, 156)
+            .preview-edit
+              color: white
+            .profile
+              .model-edit, .model-view
+                input
+                  color: white
+            .action
+              padding-top: 0.4em
+              i
+                color: white
+                float: right
+                &.del
+                  color: rgb(114, 111, 114)
+                  &:hover
+                    color: red
+                &.add
+                  margin-top: 0.2em
+                  color: white
+                  &:hover
+                    color: green
           &.light
+            ::-webkit-input-placeholder
+              color: rgb(100, 100, 100)
+            ::-moz-placeholder
+              color: rgb(100, 100, 100)
+            ::-moz-placeholder
+              color: rgb(100, 100, 100)
+            ::-ms-input-placeholder
+              color: rgb(100, 100, 100)
+            .chg-prof-pic
+              color: rgb(162, 162, 162)
+              &:hover
+                color: rgb(50, 50, 50)
             legend
-              color: rgb(140, 140, 140)
+              color: rgb(100, 100, 100)
+            .preview-edit
+              color: rgb(50, 50, 50)
             .added
               h5, span
                 color: rgb(80, 80, 80)
+            .profile
+              .model-edit, .model-view
+                input
+                  color: rgb(90, 90, 90)
+            .action
+              padding-top: 0.4em
+              i
+                color: white
+                float: right
+                &.del
+                  color: rgb(114, 111, 114)
+                  &:hover
+                    color: red
+                &.add
+                  margin-top: 0.2em
+                  color: rgb(70, 70, 70)
+                  &:hover
+                    color: green
         &.minimal
           margin-top: 10em
           &.dark
             .minimal-section
               i
+                -webkit-transition: color 0.5s
+                -moz-transition: color 0.5s
+                transition: color 0.5s
                 color: rgb(230, 230, 230)
+                &.icon-bolt:hover
+                  color: rgb(255, 173, 0)
+                &.icon-suitcase:hover
+                  color: rgb(0, 214, 255)
+                &.icon-user:hover
+                  color: rgb(255, 255, 255)
+                &.icon-globe:hover
+                  color: green
               span
                 color: rgb(200, 200, 200)
-              &:hover
-                i
-                  color: rgb(63, 209, 255)
-                span
-                  color: rgb(255, 255, 255)
           &.light
             .minimal-section
               i
-                color: rgb(50, 50, 50)
+                -webkit-transition: color 0.5s
+                -moz-transition: color 0.5s
+                transition: color 0.5s
+                color: rgb(70, 70, 70)
+                &.icon-bolt:hover
+                  color: rgb(255, 173, 0)
+                &.icon-suitcase:hover
+                  color: rgb(0, 214, 255)
+                &.icon-user:hover
+                  color: rgb(30, 30, 30)
+                &.icon-globe:hover
+                  color: green
               span
                 color: rgb(80, 80, 80)
               &:hover
-                i
-                  color: rgb(63, 209, 255)
                 span
                   color: rgb(10, 10, 10)
           .profile-pic
             margin-top: 4em
+            height: 293px
+            width: 293px
           .minimal-info
             padding-top: 1em
           span

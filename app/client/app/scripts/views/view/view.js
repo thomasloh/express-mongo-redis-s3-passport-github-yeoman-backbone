@@ -25,11 +25,24 @@ define(['_base_view', 'text!view.html'], function(BaseView, view_template) {
       'click .add-interest'           : 'e_add_interest',
       'click .del-interest'           : 'e_del_interest',
       'keyup .interest-name'          : 'e_pre_add_interest',
-      'keyup .interest-desc'          : 'e_pre_add_interest'
+      'keyup .interest-desc'          : 'e_pre_add_interest',
+      'keyup .edit-existing-exp'      : 'e_edit_existing_exp',
+      'keyup .edit-existing-proj'     : 'e_edit_existing_proj',
+      'keyup .edit-existing-interest' : 'e_edit_existing_interest',
+      'click .chg-bg'                 : 'e_change_bg',
+      'click .chg-prof-pic'           : 'e_change_profile_pic'
     },
 
     initialize: function(opts) {
       BaseView.prototype.initialize.apply(this, arguments);
+    },
+
+    load: function(cb) {
+      this.model.fetch({
+        success: function() {
+          cb();
+        }
+      });
     },
 
     postShow: function() {
@@ -41,14 +54,60 @@ define(['_base_view', 'text!view.html'], function(BaseView, view_template) {
       this.$m_btn       = this.$('.view-mode .minimal');
       this.$overlay     = this.$('.background .overlay');
       this.$edit_p      = this.$('.edit-panel');
+      this.$home        = this.$('.home');
       this.$view_mode   = this.$('.view-mode');
       this.$theme       = this.$('.theme');
+      this.$bg          = this.$('.change-bg');
       this.$profile     = this.$('.profile');
       this.$D_btn       = this.$('.theme .dark'); 
       this.$L_btn       = this.$('.theme .light');
 
-      // Get model
-      this.model.fetch();
+
+      // Mediations
+      this.$('input#change-bg').change(function(e) {
+
+        // Request creds
+        var _file = $("input#change-bg").val().replace(/.+[\\\/]/, "");
+
+        $.ajax({
+          url: "/s3/cred/bg/" + _file,
+          success: function(cred) {
+            $("#redir").val(cred.s3Redirect);
+            $("#sig").val(cred.s3Signature);
+            $("#policy").val(cred.s3PolicyBase64);
+            $("#awskey").val(cred.s3Key);
+            $("#aws-upload").submit();
+          }
+        });
+
+      });
+
+      this.$('input#change-profile-pic').change(function(e) {
+
+        // Request creds
+        var _file = $("input#change-profile-pic").val().replace(/.+[\\\/]/, "");
+
+        $.ajax({
+          url: "/s3/cred/profile/" + _file,
+          success: function(cred) {
+            $("#redir-p").val(cred.s3Redirect);
+            $("#sig-p").val(cred.s3Signature);
+            $("#policy-p").val(cred.s3PolicyBase64);
+            $("#awskey-p").val(cred.s3Key);
+            $("#aws-upload-profile-pic").submit();
+          }
+        });
+
+      });
+    },
+
+    serialize: function() {
+      return {
+        email     : this.model.get('email'),
+        theme     : this.model.get('theme'),
+        loggedIn  : this.auth.get('loggedIn'),
+        bg        : this.model.get('bg') || '/images/ggb.png'
+      }
     },
 
     show: function($el) {
@@ -64,27 +123,33 @@ define(['_base_view', 'text!view.html'], function(BaseView, view_template) {
     },
 
     display: function(mode) {
+      var _this = this;
       switch (mode) {
         case 'light':
           this.$view_mode.removeClass('dark').addClass('light');
           this.$profile.removeClass('dark').addClass('light');
           this.$theme.removeClass('dark').addClass('light');
-          this.$overlay.removeClass('dark').addClass('light');
           this.$edit_p.removeClass('dark').addClass('light');
+          this.$home.removeClass('dark').addClass('light');
+          this.$bg.removeClass('dark').addClass('light');
           // Toggle view mode setting
           this.$D_btn.removeClass('active');
           this.$L_btn.addClass('active');
-
+          _this.$overlay.removeClass('dark');
+          _this.$overlay.addClass('light');
           break;
         case 'dark':
           this.$view_mode.removeClass('light').addClass('dark');
           this.$profile.removeClass('light').addClass('dark');
           this.$theme.removeClass('light').addClass('dark');
-          this.$overlay.removeClass('light').addClass('dark');
           this.$edit_p.removeClass('light').addClass('dark');
+          this.$home.removeClass('light').addClass('dark');
+          this.$bg.removeClass('light').addClass('dark');
           // Toggle view mode setting
           this.$L_btn.removeClass('active');
           this.$D_btn.addClass('active');
+          _this.$overlay.removeClass('light');
+          _this.$overlay.addClass('dark');
           break;
       }
     },
@@ -112,10 +177,14 @@ define(['_base_view', 'text!view.html'], function(BaseView, view_template) {
     },
 
     e_light: function() {
+      this.model.set('theme', 'light');
+      this.model.save();
       this.display('light');
     },
 
     e_dark: function() {
+      this.model.set('theme', 'dark');
+      this.model.save();
       this.display('dark');
     },
 
@@ -125,7 +194,15 @@ define(['_base_view', 'text!view.html'], function(BaseView, view_template) {
 
       // Manage btn views
       this.$('.icon-ok').show();
+      this.$('.edit-ok').show().css('display', 'block');
       this.$('.icon-edit').hide();
+      this.$('.editing').hide();
+
+      // change to detailed mode
+      this.e_detailed();
+
+      // Bindings
+      var $experiences = this.$('fieldset.experiences');
     },
 
     e_ok: function() {
@@ -138,6 +215,11 @@ define(['_base_view', 'text!view.html'], function(BaseView, view_template) {
       // Manage btn views
       this.$('.icon-ok').hide();
       this.$('.icon-edit').show();
+      this.$('.editing').show();
+      this.$('.edit-ok').hide();
+
+      this.set('role', (this.get('position') ? this.get('position') + ', ' : '') + this.get('company'));
+
     },
 
     e_pre_add_exp: function(e) {
@@ -297,6 +379,76 @@ define(['_base_view', 'text!view.html'], function(BaseView, view_template) {
 
       this.model.set('interests', interests);
       this.model.trigger('change:interests');
+    },
+
+    e_edit_existing_exp: function(e) {
+      // update model
+      var value = e.currentTarget.value,
+          exp   = {
+            position: $(e.currentTarget).attr('position'),
+            company: $(e.currentTarget).attr('company')
+          },
+          key   = $(e.currentTarget).attr('edit-field'),
+          exps  = this.model.get('experiences');
+
+      _.each(exps, function(m) {
+        if (m.position === exp.position && m.company === exp.company) {
+          m[key] = value;
+        };
+      })
+
+      // update view
+      this.model.set('experiences', exps);
+      this.model.trigger('change:experiences');
+    },
+
+    e_edit_existing_proj: function(e) {
+      // update model
+      var value = e.currentTarget.value,
+          proj   = {
+            name: $(e.currentTarget).attr('name'),
+            desc: $(e.currentTarget).attr('desc')
+          },
+          key   = $(e.currentTarget).attr('edit-field'),
+          exps  = this.model.get('projects');
+
+      _.each(exps, function(m) {
+        if (m.name === proj.name && m.desc === proj.desc) {
+          m[key] = value;
+        };
+      })
+
+      // update view
+      this.model.set('projects', exps);
+      this.model.trigger('change:projects');
+    },
+
+    e_edit_existing_interest: function(e) {
+      // update model
+      var value = e.currentTarget.value,
+          interest   = {
+            name: $(e.currentTarget).attr('name')
+          },
+          key   = $(e.currentTarget).attr('edit-field'),
+          interests  = this.model.get('interests');
+
+      _.each(interests, function(m) {
+        if (m.name === interest.name) {
+          m[key] = value;
+        };
+      })
+
+      // update view
+      this.model.set('interests', interests);
+      this.model.trigger('change:interests');
+    },
+
+    e_change_bg: function() {
+      this.$('#change-bg').click();
+    },
+
+    e_change_profile_pic: function() {
+      this.$('#change-profile-pic').click();
     }
 
   });

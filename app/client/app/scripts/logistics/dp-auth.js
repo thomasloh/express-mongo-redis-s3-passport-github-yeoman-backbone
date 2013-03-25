@@ -25,10 +25,10 @@ define([], function() {
           if (auth.isLoggedIn()) {
             auth.set('user', data.user);
             auth.trigger('logged_in', data.user);
-            opts.loggedIn();
           } else {
-            opts.notLoggedIn();
+            // opts.notLoggedIn();
           }
+          opts.loggedIn();
         }
       })
     }

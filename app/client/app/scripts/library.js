@@ -3,16 +3,15 @@ define([
   'rivets',
   'foundation',
   'jquery_transition',
-  'jquery_waypoints_sticky',
-  'skrollr'
+  'jquery_waypoints_sticky'
 ], function() {
   // Settings
 
   $(function() {
     // underscore
-    _.templateSettings = {
-      interpolate : /\{\{(.+?)\}\}/g
-    };
+    // _.templateSettings = {
+    //   interpolate : /\{\{(.+?)\}\}/g
+    // };
 
     // foundation
     $(document).foundation();
@@ -22,10 +21,10 @@ define([
       prefix: 'dp',
       adapter: {
         subscribe: function(obj, keypath, callback) {
-          obj.on('change:' + keypath, callback)
+          obj.on('change:' + keypath, callback);
         },
         unsubscribe: function(obj, keypath, callback) {
-          obj.off('change:' + keypath, callback)
+          obj.off('change:' + keypath, callback);
         },
         read: function(obj, keypath) {
           var paths = keypath.match(/\./);
@@ -34,11 +33,15 @@ define([
             var eval_string = 'obj.get(paths[0])' + _.reduce(paths.slice(1), function(i, o){return i + '[\"' + o + '\"]'}, '');
             return eval(eval_string);
           } else {
-            return obj.get(keypath)
+            return obj.get(keypath);
           }
         },
         publish: function(obj, keypath, value) {
-          obj.set(keypath, value)
+          if (obj instanceof Backbone.Model) {
+            obj.set(keypath, value);
+          } else {
+            obj[keypath] = value;
+          }
         }
       }
     });

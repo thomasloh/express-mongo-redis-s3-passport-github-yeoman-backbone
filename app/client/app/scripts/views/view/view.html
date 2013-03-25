@@ -1,32 +1,81 @@
-<div class="background">
-  <div class="overlay dark">
+<div class="background" style="background: url('<%= bg %>');background-size: cover;">
+  <div class="overlay <%= theme %> ">
     
   </div>
 </div>
 
-<!-- Edit button -->
-<div class="edit-panel dark">
-  <i class="icon-edit icon-2x"></i>
-  <i class="icon-ok icon-2x"></i>
+<!-- Home -->
+<div class="home <%= theme %> ">
+  <a href="/" data-bypass>
+    <h1>Detaild</h1>
+  </a>
 </div>
+
+<!-- Edit button -->
+<% if(loggedIn) { %>
+
+  <div class="change-bg <%= theme %>">
+    <span class="chg-bg">change background</span>
+
+    <form id="aws-upload" action="https://detaild.co.s3.amazonaws.com/" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="key" value="uploads/${filename}">
+      <input id="awskey" type="hidden" name="AWSAccessKeyId" value="YOUR_AWS_ACCESS_KEY"> 
+      <input type="hidden" name="acl" value="public-read"> 
+      <input id="redir" type="hidden" name="success_action_redirect" value="http://localhost/">
+      <input id="policy" type="hidden" name="policy" value="YOUR_POLICY_DOCUMENT_BASE64_ENCODED">
+      <input id="sig" type="hidden" name="signature" value="YOUR_CALCULATED_SIGNATURE">
+      <input type="hidden" name="Content-Type" value="image/jpeg">
+      <!-- Include any additional input fields here -->
+
+      <!-- File to upload to S3:  -->
+      <input id="change-bg" name="file" type="file" style="visibility: hidden;"> 
+      <br> 
+      <input type="submit" value="Upload File to S3" style="visibility: hidden;"> 
+    </form>
+  </div>
+  
+  <div class="signout <%= theme %> ">
+    <a href="/logout" data-bypass>
+      <i class="icon-signout icon-2x"></i>
+    </a>
+    <span>sign out</span>
+  </div>
+
+  <div class="edit-panel <%= theme %> ">
+    <i class="icon-edit icon-2x"></i>
+    <span class="editing">edit</span>
+    <i class="icon-ok icon-2x"></i>
+    <span class="edit-ok">done</span>
+  </div>
+
+<% } %>
+
 
 <!-- View mode -->
-<div class="view-mode dark">
-  <span class="minimal">minimal</span>
-  <span class="detailed active">detailed</span>
+<div class="view-mode <%= theme %> ">
+  <span class="minimal active">minimal</span>
+  <span class="detailed">detailed</span>
 </div>
 
-<!-- Theme. only for this user -->
-<div class="theme dark">
-  <span class="light">light</span>
-  <span class="dark active">dark</span>
+<!-- Learn more link -->
+<!-- <div class="learn-more <%= theme %> ">
+  <i class="icon-angle-down icon-2x"></i>
 </div>
+ -->
+<!-- Theme. only for this user -->
+
+<% if(loggedIn) { %>
+  <div class="theme <%= theme %> ">
+    <span class="light <%= theme === 'light' ? 'active' : ''%>">light</span>
+    <span class="dark <%= theme === 'dark' ? 'active' : ''%>">dark</span>
+  </div>
+<% } %>
 
 
 <!-- Minimal -->
 <!-- ================================================================================ -->
 
-<div class="profile minimal dark hide">
+<div class="profile minimal <%= theme %>">
 
   <div class="row">
 
@@ -42,7 +91,7 @@
 
     <div class="large-6 columns">
 
-      <img class="th profile-pic" data-dp-src="model.github_data._json.avatar_url" alt="profile-image">
+      <img class="th profile-pic" data-dp-src="model.profile_pic" alt="profile-image">
 
     </div>
 
@@ -65,9 +114,7 @@
             <i class="icon-suitcase icon-4x"></i>
           </div>
           <div class="large-9 columns minimal-info">
-            <span class="role" data-dp-text="model.position"></span>
-            <span>,</span>
-            <span class="role" data-dp-text="model.company"></span>
+            <span class="role" data-dp-text="model.role  < .position .company"></span>
           </div>
         </div>
       </p>
@@ -104,11 +151,32 @@
 <!-- ================================================================================ -->
 
 
-<div class="profile detailed dark">
+<div class="profile detailed <%= theme %> hide">
 
   <div class="large-4 columns sidebar">
 
-    <img class="th profile-pic" data-dp-src="model.github_data._json.avatar_url" alt="profile-image">
+    <img class="th profile-pic" data-dp-src="model.profile_pic" alt="profile-image">
+    <% if(loggedIn) { %>
+    <div style="text-align: center;">
+      <span class="chg-prof-pic">change profile pic</span>
+    </div>
+    <form id="aws-upload-profile-pic" action="https://detaild.co.s3.amazonaws.com/" method="post" enctype="multipart/form-data" style="position: fixed; visibility: hidden;">
+      <input type="hidden" name="key" value="uploads/${filename}">
+      <input id="awskey-p" type="hidden" name="AWSAccessKeyId" value="YOUR_AWS_ACCESS_KEY"> 
+      <input type="hidden" name="acl" value="public-read"> 
+      <input id="redir-p" type="hidden" name="success_action_redirect" value="http://localhost/">
+      <input id="policy-p" type="hidden" name="policy" value="YOUR_POLICY_DOCUMENT_BASE64_ENCODED">
+      <input id="sig-p" type="hidden" name="signature" value="YOUR_CALCULATED_SIGNATURE">
+      <input type="hidden" name="Content-Type" value="image/jpeg">
+      <!-- Include any additional input fields here -->
+
+      <!-- File to upload to S3:  -->
+      <input id="change-profile-pic" name="file" type="file" style="visibility: hidden;"> 
+      <br> 
+      <input type="submit" value="Upload File to S3" style="visibility: hidden;"> 
+    </form>
+
+    <% } %>
 
     <br>
 
@@ -126,7 +194,7 @@
       <p>
         <div class="row minimal-section">
           <div class="large-3 columns icon-col">
-            <i class="icon-user icon-2x"></i>
+            <i class="icon-user"></i>
           </div>
           <div class="large-9 columns minimal-info model-view">
             <span class="view minimal" data-dp-text="model.name"></span>
@@ -138,7 +206,7 @@
       <p class="role">
         <div class="row minimal-section">
           <div class="large-3 columns icon-col">
-            <i class="icon-suitcase icon-2x"></i>
+            <i class="icon-suitcase"></i>
           </div>
           <div class="large-9 columns minimal-info model-view">
             <span class="role minimal view" data-dp-text="model.position"></span>
@@ -150,7 +218,7 @@
       <p class="role">
         <div class="row minimal-section">
           <div class="large-3 columns icon-col">
-            <i class="icon-home icon-2x"></i>
+            <i class="icon-home"></i>
           </div>
           <div class="large-9 columns minimal-info model-view">
             <span class="role view minimal" data-dp-text="model.company"></span>
@@ -162,7 +230,7 @@
       <p>
         <div class="row minimal-section">
           <div class="large-3 columns icon-col">
-            <i class="icon-bolt icon-2x"></i>
+            <i class="icon-bolt"></i>
           </div>
           <div class="large-9 columns minimal-info model-view">
             <span class="view minimal specialty" data-dp-text="model.specialty"></span>
@@ -174,7 +242,7 @@
       <p>
         <div class="row minimal-section">
           <div class="large-3 columns icon-col">
-            <i class="icon-globe icon-2x"></i>
+            <i class="icon-globe"></i>
           </div>
           <div class="large-9 columns minimal-info model-view">
             <span class="view minimal location" data-dp-text="model.location"></span>
@@ -195,18 +263,23 @@
       <p>
         <div class="row minimal-section">
           <div class="large-3 columns icon-col">
-            <i class="icon-envelope icon-2x"></i>
+            <a style="color:black;" href="mailto:<%= email %>?Subject=Hello">
+              <i class="icon-envelope"></i>
+            </a>
           </div>
           <div class="large-9 columns minimal-info model-view">
-            <span class=" view minimal email" data-dp-text="model.email"></span>
+            <a style="color:black;" href="mailto:<%= email %>?Subject=Hello">
+              <span class=" view minimal email" data-dp-text="model.email"></span>
+            </a>
             <input type="text" class="edit minimal" data-dp-value="model.email">
           </div>
         </div>
       </p>
-      <p>
+
+<!--       <p>
         <div class="row minimal-section">
           <div class="large-3 columns icon-col">
-            <i class="icon-twitter icon-2x"></i>
+            <i class="icon-twitter"></i>
           </div>
           <div class="large-9 columns minimal-info model-view">
             <span class="view minimal twitter" data-dp-text="model.twitter"></span>
@@ -214,10 +287,13 @@
           </div>
         </div>
       </p>
+ -->      
       <p>
         <div class="row minimal-section">
           <div class="large-3 columns icon-col">
-            <i class="icon-github icon-2x"></i>
+            <a data-dp-href="model.github_data._json.html_url" target="_blank">
+              <i class="icon-github"></i>
+            </a>
           </div>
           <div class="large-9 columns minimal-info model-view">
             <a data-dp-href="model.github_data._json.html_url" target="_blank">
@@ -229,7 +305,9 @@
       <p>
         <div class="row minimal-section">
           <div class="large-3 columns icon-col">
-            <i class="icon-bookmark icon-2x"></i>
+            <a data-dp-href="model.github_data._json.blog | link" target="_blank">
+              <i class="icon-bookmark"></i>
+            </a>
           </div>
           <div class="large-9 columns minimal-info model-view">
             <a data-dp-href="model.github_data._json.blog | link" target="_blank">
@@ -262,7 +340,7 @@
       </div>
       
     </div>
-    <div class="row">
+    <div class="row exp-proj-int">
 
       <div class="large-12 columns">
 
@@ -275,13 +353,19 @@
           <div class="row preview" data-dp-each-experience="model.experiences">
 
             <div class="large-5 columns added">
-              <h5 data-dp-text="experience:position">
+              <h5 data-dp-text="experience:position" class="preview-view">
               </h5>
+              <input class="edit-existing-exp preview-edit" edit-field="position" type="text" data-dp-value="experience:position" data-dp-position="experience:position" data-dp-company="experience:company">
             </div>
 
-            <div class="large-6 columns added">
-              <h5 data-dp-text="experience:company">
+            <div class="large-1 columns added dash">
+              <h5></h5>
+            </div>
+
+            <div class="large-5 columns added">
+              <h5 data-dp-text="experience:company" class="preview-view">
               </h5>
+              <input class="edit-existing-exp preview-edit" edit-field="company" type="text" data-dp-value="experience:company" data-dp-position="experience:position" data-dp-company="experience:company">
             </div>
             <div class="large-1 columns action">
               <i class="icon-minus icon-2x del-exp del" data-dp-position="experience:position" data-dp-company="experience:company"></i>
@@ -293,7 +377,10 @@
             <div class="large-5 columns">
               <input type="text" class="pos" placeholder="Position">
             </div>
-            <div class="large-6 columns">
+            <div class="large-1 columns added dash">
+              <h5 style="color: rgb(150, 150, 150)"></h5>
+            </div>
+            <div class="large-5 columns">
               <input type="text" class="com" placeholder="Company">
             </div>
             <div class="large-1 columns action">
@@ -321,8 +408,9 @@
 
             <div class="row">
               <div class="large-11 columns added">
-                <h5 data-dp-text="project:name">
+                <h5 data-dp-text="project:name" class="preview-view">
                 </h5>
+                <input class="edit-existing-proj preview-edit" edit-field="name" type="text" data-dp-value="project:name" data-dp-name="project:name" data-dp-desc="project:desc">
               </div>
 
               <div class="large-1 columns added action">
@@ -331,7 +419,8 @@
             </div>
             <div class="row">
               <div class="large-12 columns added">
-                <span data-dp-text="project:desc"></span>
+                <span data-dp-text="project:desc" class="preview-view"></span>
+                <input class="edit-existing-proj preview-edit" edit-field="desc" type="text" data-dp-value="project:desc" data-dp-name="project:name" data-dp-desc="project:desc">
               </div>
             </div>
 
@@ -339,7 +428,7 @@
           <!-- EDIT -->
           <div class="row projects edit-area">
             <div class="large-11 columns">
-              <input type="text" class="proj-name" placeholder="Name">
+              <input type="text" class="proj-name" placeholder="Project name">
             </div>
             <div class="large-1 columns action">
               <i class="icon-plus icon-2x add-proj add"></i>
@@ -347,7 +436,7 @@
           </div>
           <div class="row projects edit-area">
             <div class="large-11 columns">
-              <input type="text" class="proj-desc" placeholder="Simple description">
+              <input type="text" class="proj-desc" placeholder="A short description about the project">
             </div>
           </div>
         </fieldset>
@@ -369,8 +458,9 @@
 
             <div class="row">
               <div class="large-11 columns added">
-                <h5 data-dp-text="interest:name">
+                <h5 data-dp-text="interest:name" class="preview-view">
                 </h5>
+                <input class="edit-existing-interest preview-edit" edit-field="name" type="text" data-dp-value="interest:name" data-dp-name="interest:name">
               </div>
 
               <div class="large-1 columns added action">

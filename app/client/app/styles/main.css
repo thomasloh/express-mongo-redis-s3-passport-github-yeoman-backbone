@@ -7060,42 +7060,117 @@ ul.icons li [class*=" icon-"] {
 
 /* line 7, main.sass */
 * {
-  -webkit-transition: all 0.7s;
-  -moz-transition: all 0.7s;
-  transition: all 0.7s;
+  -webkit-transition: color 0.5s;
+  -moz-transition: color 0.5s;
+  transition: color 0.5s;
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 
-/* line 13, main.sass */
+/* line 16, main.sass */
 .panel {
   background: rgba(255, 255, 255, 0.85);
 }
 
-/* line 20, main.sass */
+/* line 24, main.sass */
+body .panel.callout input ::-webkit-input-placeholder {
+  color: white;
+}
+/* line 26, main.sass */
+body .panel.callout input ::-moz-placeholder {
+  color: white;
+}
+/* line 28, main.sass */
+body .panel.callout input ::-moz-placeholder {
+  color: white;
+}
+/* line 30, main.sass */
+body .panel.callout input ::-ms-input-placeholder {
+  color: white;
+}
+/* line 32, main.sass */
 body h1, body h2, body h3, body h4, body h5 {
   font-family: "Lato", sans-serif;
   font-weight: 300;
 }
-/* line 24, main.sass */
+/* line 35, main.sass */
 body #unauthenticated {
+  display: none;
+}
+/* line 38, main.sass */
+body.unauth {
+  background: url("../images/marin.png");
+  background-size: cover;
+}
+/* line 41, main.sass */
+body.unauth #unauthenticated {
+  display: block;
   position: fixed;
   left: 35%;
   top: 40%;
   width: 35%;
 }
-/* line 30, main.sass */
+/* line 42, main.sass */
+body.unauth #unauthenticated .overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: black;
+  opacity: 0.7;
+}
+/* line 50, main.sass */
+body.unauth #unauthenticated .button {
+  z-index: 5;
+}
+/* line 65, main.sass */
+body.unauth #unauthenticated span {
+  font-size: 2.6em;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  top: -0.2em;
+  position: relative;
+  color: white;
+}
+/* line 77, main.sass */
+body.unauth #unauthenticated .msg {
+  top: -3em;
+  position: absolute;
+  font-size: 2.5em;
+  font-family: "raleway", sans-serif;
+  width: 20em;
+  text-align: center;
+  margin-left: -4em;
+}
+/* line 85, main.sass */
+body.unauth #unauthenticated h1 {
+  top: 0;
+  left: 1em;
+  position: fixed;
+  font-weight: 700;
+  font-family: "museo-slab", serif;
+  color: white;
+}
+/* line 92, main.sass */
 body #main {
   position: relative;
   height: 100%;
   width: 100%;
 }
-/* line 35, main.sass */
+/* line 96, main.sass */
 body #main .logout {
   margin-top: 2em;
   float: right;
 }
-/* line 39, main.sass */
+/* line 100, main.sass */
+body #main #view .exp-proj-int {
+  margin-top: 2em;
+}
+/* line 102, main.sass */
 body #main #view .background {
-  background: url("../images/trapit.png") no-repeat;
+  background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
   z-index: -1;
@@ -7106,8 +7181,11 @@ body #main #view .background {
   width: 100%;
   height: 100%;
 }
-/* line 51, main.sass */
+/* line 113, main.sass */
 body #main #view .background .overlay {
+  -webkit-transition: background 0.7s;
+  -moz-transition: background 0.7s;
+  transition: background 0.7s;
   background-size: cover;
   position: fixed;
   z-index: 1;
@@ -7118,53 +7196,136 @@ body #main #view .background .overlay {
   width: 100%;
   height: 100%;
 }
-/* line 61, main.sass */
+/* line 126, main.sass */
 body #main #view .background .overlay.light {
   background: white;
   opacity: 0.7;
 }
-/* line 64, main.sass */
+/* line 129, main.sass */
 body #main #view .background .overlay.dark {
   background: #010203;
   opacity: 0.6;
 }
-/* line 67, main.sass */
+/* line 132, main.sass */
+body #main #view .signout {
+  position: fixed;
+  right: 1.3%;
+  top: 1.6em;
+}
+/* line 136, main.sass */
+body #main #view .signout .icon-signout {
+  display: block;
+  text-align: center;
+}
+/* line 140, main.sass */
+body #main #view .signout:hover span {
+  opacity: 1;
+}
+/* line 142, main.sass */
+body #main #view .signout span {
+  opacity: 0;
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+  font-size: 1em;
+  text-align: center;
+}
+/* line 150, main.sass */
+body #main #view .signout.dark span {
+  color: #b4b4b4;
+}
+/* line 152, main.sass */
+body #main #view .signout.dark .icon-signout {
+  color: #b4b4b4;
+}
+/* line 154, main.sass */
+body #main #view .signout.dark .icon-signout:hover {
+  color: white;
+}
+/* line 160, main.sass */
+body #main #view .signout.light span {
+  color: #a2a2a2;
+}
+/* line 162, main.sass */
+body #main #view .signout.light .icon-signout {
+  color: #a2a2a2;
+}
+/* line 164, main.sass */
+body #main #view .signout.light .icon-signout:hover {
+  color: #323232;
+}
+/* line 166, main.sass */
 body #main #view .edit-panel {
   position: fixed;
-  right: 2.5em;
-  top: 1.4em;
+  right: 7%;
+  top: 1.6em;
 }
-/* line 71, main.sass */
+/* line 170, main.sass */
+body #main #view .edit-panel .icon-edit {
+  display: block;
+  text-align: center;
+}
+/* line 174, main.sass */
+body #main #view .edit-panel:hover span {
+  opacity: 1;
+}
+/* line 176, main.sass */
+body #main #view .edit-panel span {
+  opacity: 0;
+  display: block;
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+  font-size: 1em;
+  text-align: center;
+}
+/* line 184, main.sass */
 body #main #view .edit-panel .icon-ok {
   display: none;
   color: green;
 }
-/* line 74, main.sass */
+/* line 187, main.sass */
 body #main #view .edit-panel .icon-ok:hover {
   color: #17f117;
 }
-/* line 77, main.sass */
-body #main #view .edit-panel.dark .icon-edit {
-  color: #646464;
+/* line 189, main.sass */
+body #main #view .edit-panel .edit-ok {
+  display: none;
 }
-/* line 79, main.sass */
+/* line 192, main.sass */
+body #main #view .edit-panel.dark span {
+  color: #b4b4b4;
+}
+/* line 194, main.sass */
+body #main #view .edit-panel.dark .icon-edit {
+  color: #b4b4b4;
+}
+/* line 196, main.sass */
 body #main #view .edit-panel.dark .icon-edit:hover {
   color: white;
 }
-/* line 86, main.sass */
-body #main #view .edit-panel.light .icon-edit:hover {
-  color: white;
+/* line 202, main.sass */
+body #main #view .edit-panel.light span {
+  color: #a2a2a2;
 }
-/* line 91, main.sass */
-body #main #view .view-mode, body #main #view .theme {
+/* line 204, main.sass */
+body #main #view .edit-panel.light .icon-edit {
+  color: #a2a2a2;
+}
+/* line 206, main.sass */
+body #main #view .edit-panel.light .icon-edit:hover {
+  color: #323232;
+}
+/* line 211, main.sass */
+body #main #view .view-mode, body #main #view .theme, body #main #view .learn-more, body #main #view .change-bg {
   position: fixed;
   top: 0;
   right: 0;
   margin-top: 2%;
-  margin-right: 10%;
+  margin-right: 13%;
 }
-/* line 97, main.sass */
-body #main #view .view-mode span, body #main #view .theme span {
+/* line 217, main.sass */
+body #main #view .view-mode span, body #main #view .theme span, body #main #view .learn-more span, body #main #view .change-bg span {
   cursor: default;
   font-family: "Lato", sans-serif;
   font-weight: 200;
@@ -7172,45 +7333,113 @@ body #main #view .view-mode span, body #main #view .theme span {
   opacity: 0.5;
   font-size: 1.2em;
 }
-/* line 105, main.sass */
-body #main #view .view-mode.light span, body #main #view .theme.light span {
+/* line 225, main.sass */
+body #main #view .view-mode.light span, body #main #view .view-mode.light h3, body #main #view .theme.light span, body #main #view .theme.light h3, body #main #view .learn-more.light span, body #main #view .learn-more.light h3, body #main #view .change-bg.light span, body #main #view .change-bg.light h3 {
   color: #a2a2a2;
 }
-/* line 107, main.sass */
-body #main #view .view-mode.light span:hover, body #main #view .theme.light span:hover {
+/* line 227, main.sass */
+body #main #view .view-mode.light span:hover, body #main #view .view-mode.light h3:hover, body #main #view .theme.light span:hover, body #main #view .theme.light h3:hover, body #main #view .learn-more.light span:hover, body #main #view .learn-more.light h3:hover, body #main #view .change-bg.light span:hover, body #main #view .change-bg.light h3:hover {
   color: #323232;
   opacity: 1;
 }
-/* line 110, main.sass */
-body #main #view .view-mode.light span.active, body #main #view .theme.light span.active {
+/* line 230, main.sass */
+body #main #view .view-mode.light span.active, body #main #view .view-mode.light h3.active, body #main #view .theme.light span.active, body #main #view .theme.light h3.active, body #main #view .learn-more.light span.active, body #main #view .learn-more.light h3.active, body #main #view .change-bg.light span.active, body #main #view .change-bg.light h3.active {
   color: #323232;
   border-bottom: 3px solid #11c4f1;
   padding-bottom: 0.3em;
 }
-/* line 115, main.sass */
-body #main #view .view-mode.dark span, body #main #view .theme.dark span {
+/* line 235, main.sass */
+body #main #view .view-mode.dark span, body #main #view .view-mode.dark h3, body #main #view .theme.dark span, body #main #view .theme.dark h3, body #main #view .learn-more.dark span, body #main #view .learn-more.dark h3, body #main #view .change-bg.dark span, body #main #view .change-bg.dark h3 {
   color: #b4b4b4;
 }
-/* line 117, main.sass */
-body #main #view .view-mode.dark span:hover, body #main #view .theme.dark span:hover {
+/* line 237, main.sass */
+body #main #view .view-mode.dark span:hover, body #main #view .view-mode.dark h3:hover, body #main #view .theme.dark span:hover, body #main #view .theme.dark h3:hover, body #main #view .learn-more.dark span:hover, body #main #view .learn-more.dark h3:hover, body #main #view .change-bg.dark span:hover, body #main #view .change-bg.dark h3:hover {
   color: white;
   opacity: 1;
 }
-/* line 120, main.sass */
-body #main #view .view-mode.dark span.active, body #main #view .theme.dark span.active {
+/* line 240, main.sass */
+body #main #view .view-mode.dark span.active, body #main #view .view-mode.dark h3.active, body #main #view .theme.dark span.active, body #main #view .theme.dark h3.active, body #main #view .learn-more.dark span.active, body #main #view .learn-more.dark h3.active, body #main #view .change-bg.dark span.active, body #main #view .change-bg.dark h3.active {
   color: #ebebeb;
   border-bottom: 3px solid #11c4f1;
   padding-bottom: 0.3em;
 }
-/* line 124, main.sass */
+/* line 244, main.sass */
+body #main #view .learn-more {
+  position: fixed;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  margin-right: 3%;
+  margin-bottom: 1em;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  background: rgba(54, 53, 53, 0.8);
+  border-radius: 0.2em;
+  width: 1.8em;
+  height: 2em;
+  text-align: center;
+}
+/* line 259, main.sass */
+body #main #view .learn-more i {
+  color: white;
+}
+/* line 261, main.sass */
+body #main #view .learn-more:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+/* line 263, main.sass */
+body #main #view .learn-more:hover i {
+  color: #1e1e1e;
+}
+/* line 265, main.sass */
+body #main #view .change-bg {
+  margin-right: 27%;
+}
+/* line 268, main.sass */
+body #main #view .change-bg.light span {
+  color: #a2a2a2;
+}
+/* line 270, main.sass */
+body #main #view .change-bg.light span:hover {
+  color: #323232;
+}
+/* line 273, main.sass */
+body #main #view .change-bg.dark span {
+  color: #b4b4b4;
+}
+/* line 275, main.sass */
+body #main #view .change-bg.dark span:hover {
+  color: white;
+}
+/* line 277, main.sass */
+body #main #view .home {
+  position: fixed;
+  top: -0.5em;
+  left: 0;
+  margin-left: 3em;
+}
+/* line 283, main.sass */
+body #main #view .home.dark h1 {
+  font-weight: 700;
+  font-family: "museo-slab", serif;
+  color: #fafafa;
+}
+/* line 288, main.sass */
+body #main #view .home.light h1 {
+  font-weight: 700;
+  font-family: "museo-slab", serif;
+  color: #3c3c3c;
+}
+/* line 292, main.sass */
 body #main #view .theme {
   margin-right: 25%;
 }
-/* line 127, main.sass */
+/* line 295, main.sass */
 body #main #view .profile .model-edit, body #main #view .profile .model-view {
   border: none;
 }
-/* line 129, main.sass */
+/* line 297, main.sass */
 body #main #view .profile .model-edit legend, body #main #view .profile .model-view legend {
   background: transparent;
   color: #c2bfbf;
@@ -7218,11 +7447,7 @@ body #main #view .profile .model-edit legend, body #main #view .profile .model-v
   font-weight: 300;
   font-family: "proxima-nova", sans-serif;
 }
-/* line 135, main.sass */
-body #main #view .profile .model-edit .preview, body #main #view .profile .model-view .preview {
-  margin-bottom: 1em;
-}
-/* line 137, main.sass */
+/* line 303, main.sass */
 body #main #view .profile .model-edit input, body #main #view .profile .model-view input {
   box-shadow: none;
   padding: 0;
@@ -7232,218 +7457,396 @@ body #main #view .profile .model-edit input, body #main #view .profile .model-vi
   border: none;
   color: white;
   display: inline-block;
-  font-weight: 300;
+  font-weight: 400;
   font-family: "proxima-nova", sans-serif;
 }
-/* line 149, main.sass */
-body #main #view .profile .model-edit .action i, body #main #view .profile .model-view .action i {
-  color: white;
-  float: right;
+/* line 314, main.sass */
+body #main #view .profile .model-edit .preview, body #main #view .profile .model-view .preview {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
 }
-/* line 152, main.sass */
-body #main #view .profile .model-edit .action i.del, body #main #view .profile .model-view .action i.del {
-  color: #726f72;
+/* line 318, main.sass */
+body #main #view .profile .model-edit .added span, body #main #view .profile .model-view .added span {
+  color: gainsboro;
+  font-weight: 500;
+  margin-left: 1em;
 }
-/* line 154, main.sass */
-body #main #view .profile .model-edit .action i.del:hover, body #main #view .profile .model-view .action i.del:hover {
-  color: red;
-}
-/* line 156, main.sass */
-body #main #view .profile .model-edit .action i.add, body #main #view .profile .model-view .action i.add {
-  margin-top: 0.4em;
-  color: #726f72;
-}
-/* line 159, main.sass */
-body #main #view .profile .model-edit .action i.add:hover, body #main #view .profile .model-view .action i.add:hover {
-  color: white;
-}
-/* line 162, main.sass */
+/* line 322, main.sass */
 body #main #view .profile .model-edit .added h5, body #main #view .profile .model-view .added h5 {
   color: white;
   display: inline;
 }
-/* line 166, main.sass */
+/* line 325, main.sass */
+body #main #view .profile .model-edit .added.dash, body #main #view .profile .model-view .added.dash {
+  padding-top: 0.4em;
+}
+/* line 327, main.sass */
+body #main #view .profile .model-edit .added.dash h5, body #main #view .profile .model-view .added.dash h5 {
+  color: #969696;
+}
+/* line 330, main.sass */
 body #main #view .profile .model-view .edit {
   display: none;
 }
-/* line 168, main.sass */
+/* line 333, main.sass */
+body #main #view .profile .model-view .added .preview-view {
+  display: block;
+  font-size: 1.2em;
+  font-family: "proxima-nova", sans-serif;
+}
+/* line 337, main.sass */
+body #main #view .profile .model-view .added .preview-edit {
+  display: none;
+}
+/* line 339, main.sass */
 body #main #view .profile .model-view .view {
   font-size: 1.6875em;
-  font-weight: 300;
+  font-weight: 400;
   margin: 0;
 }
-/* line 172, main.sass */
+/* line 343, main.sass */
 body #main #view .profile .model-view .view.minimal {
   font-size: 1em;
 }
-/* line 174, main.sass */
+/* line 345, main.sass */
 body #main #view .profile .model-view .action, body #main #view .profile .model-view .edit-area {
   opacity: 0;
 }
-/* line 177, main.sass */
+/* line 349, main.sass */
+body #main #view .profile .model-edit .added .preview-view {
+  display: none;
+}
+/* line 351, main.sass */
+body #main #view .profile .model-edit .added .preview-edit {
+  margin: 0;
+  padding: 0;
+  display: block;
+  font-family: "proxima-nova", sans-serif;
+  font-size: 1.2em;
+}
+/* line 357, main.sass */
 body #main #view .profile .model-edit .edit {
   font-size: 1.6875em;
 }
-/* line 179, main.sass */
+/* line 359, main.sass */
 body #main #view .profile .model-edit .edit.minimal {
   margin: -1em 0 0 0;
   font-size: 1em;
-  font-weight: 300;
+  font-weight: 400;
   color: #222222;
   line-height: 16px;
   height: 100%;
   box-sizing: border-box;
 }
-/* line 187, main.sass */
+/* line 367, main.sass */
 body #main #view .profile .model-edit .view {
   display: none;
 }
-/* line 189, main.sass */
+/* line 369, main.sass */
 body #main #view .profile .minimal-header {
   color: #6d6d6d;
 }
-/* line 191, main.sass */
+/* line 371, main.sass */
 body #main #view .profile .minimal-section {
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
 }
-/* line 195, main.sass */
+/* line 375, main.sass */
 body #main #view .profile .icon-col {
   text-align: center;
-  top: -0.4em;
 }
-/* line 198, main.sass */
-body #main #view .profile .icon-col .icon-twitter {
+/* line 376, main.sass */
+body #main #view .profile .icon-col i {
+  -webkit-transition: color 0.5s;
+  -moz-transition: color 0.5s;
+  transition: color 0.5s;
+}
+/* line 381, main.sass */
+body #main #view .profile .icon-col .icon-twitter:hover {
   color: #3fd1ff;
 }
-/* line 200, main.sass */
-body #main #view .profile .icon-col .icon-github {
+/* line 383, main.sass */
+body #main #view .profile .icon-col .icon-github:hover {
   color: #646161;
 }
-/* line 202, main.sass */
-body #main #view .profile .icon-col .icon-envelope {
+/* line 385, main.sass */
+body #main #view .profile .icon-col .icon-envelope:hover {
   color: #b1b5b6;
 }
-/* line 204, main.sass */
-body #main #view .profile .icon-col .icon-bolt {
+/* line 387, main.sass */
+body #main #view .profile .icon-col .icon-bolt:hover {
   color: #ffad00;
 }
-/* line 206, main.sass */
-body #main #view .profile .icon-col .icon-bookmark {
-  color: white;
+/* line 389, main.sass */
+body #main #view .profile .icon-col .icon-bookmark:hover {
+  color: #c73030;
 }
-/* line 208, main.sass */
-body #main #view .profile .icon-col .icon-home {
+/* line 391, main.sass */
+body #main #view .profile .icon-col .icon-home:hover {
   color: #5e0707;
 }
-/* line 210, main.sass */
-body #main #view .profile .icon-col .icon-globe {
+/* line 393, main.sass */
+body #main #view .profile .icon-col .icon-globe:hover {
   color: green;
 }
-/* line 212, main.sass */
-body #main #view .profile .icon-col .icon-suitcase {
-  color: #a3500e;
+/* line 395, main.sass */
+body #main #view .profile .icon-col .icon-suitcase:hover {
+  color: #00d6ff;
 }
-/* line 214, main.sass */
-body #main #view .profile .icon-col .icon-user {
+/* line 397, main.sass */
+body #main #view .profile .icon-col .icon-user:hover {
   color: #444242;
 }
-/* line 216, main.sass */
+/* line 399, main.sass */
+body #main #view .profile .icon-col a {
+  color: black;
+}
+/* line 401, main.sass */
 body #main #view .profile span {
   cursor: default;
   font-family: "proxima-nova", sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-style: normal;
   font-size: 1em;
   display: inline;
 }
-/* line 223, main.sass */
+/* line 408, main.sass */
 body #main #view .profile .name {
   font-family: "proxima-nova", sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 1.1em;
 }
-/* line 227, main.sass */
+/* line 412, main.sass */
 body #main #view .profile.detailed {
   margin-top: 4em;
   opacity: 1;
 }
-/* line 230, main.sass */
+/* line 415, main.sass */
 body #main #view .profile.detailed h5 {
   font-weight: 400;
 }
-/* line 233, main.sass */
+/* line 417, main.sass */
+body #main #view .profile.detailed .chg-prof-pic {
+  -webkit-transition: color 0.5s;
+  -moz-transition: color 0.5s;
+  transition: color 0.5s;
+}
+/* line 423, main.sass */
+body #main #view .profile.detailed.dark ::-webkit-input-placeholder {
+  color: white;
+}
+/* line 425, main.sass */
+body #main #view .profile.detailed.dark ::-moz-placeholder {
+  color: white;
+}
+/* line 427, main.sass */
+body #main #view .profile.detailed.dark ::-moz-placeholder {
+  color: white;
+}
+/* line 429, main.sass */
+body #main #view .profile.detailed.dark ::-ms-input-placeholder {
+  color: white;
+}
+/* line 431, main.sass */
+body #main #view .profile.detailed.dark .chg-prof-pic {
+  color: #969696;
+}
+/* line 433, main.sass */
+body #main #view .profile.detailed.dark .chg-prof-pic:hover {
+  color: white;
+}
+/* line 435, main.sass */
 body #main #view .profile.detailed.dark .preview {
   color: #646464;
 }
-/* line 235, main.sass */
+/* line 437, main.sass */
 body #main #view .profile.detailed.dark .added {
   color: #9e9c9c;
 }
-/* line 238, main.sass */
-body #main #view .profile.detailed.light legend {
-  color: #8c8c8c;
+/* line 439, main.sass */
+body #main #view .profile.detailed.dark .preview-edit {
+  color: white;
 }
-/* line 241, main.sass */
+/* line 443, main.sass */
+body #main #view .profile.detailed.dark .profile .model-edit input, body #main #view .profile.detailed.dark .profile .model-view input {
+  color: white;
+}
+/* line 445, main.sass */
+body #main #view .profile.detailed.dark .action {
+  padding-top: 0.4em;
+}
+/* line 447, main.sass */
+body #main #view .profile.detailed.dark .action i {
+  color: white;
+  float: right;
+}
+/* line 450, main.sass */
+body #main #view .profile.detailed.dark .action i.del {
+  color: #726f72;
+}
+/* line 452, main.sass */
+body #main #view .profile.detailed.dark .action i.del:hover {
+  color: red;
+}
+/* line 454, main.sass */
+body #main #view .profile.detailed.dark .action i.add {
+  margin-top: 0.2em;
+  color: white;
+}
+/* line 457, main.sass */
+body #main #view .profile.detailed.dark .action i.add:hover {
+  color: green;
+}
+/* line 460, main.sass */
+body #main #view .profile.detailed.light ::-webkit-input-placeholder {
+  color: #646464;
+}
+/* line 462, main.sass */
+body #main #view .profile.detailed.light ::-moz-placeholder {
+  color: #646464;
+}
+/* line 464, main.sass */
+body #main #view .profile.detailed.light ::-moz-placeholder {
+  color: #646464;
+}
+/* line 466, main.sass */
+body #main #view .profile.detailed.light ::-ms-input-placeholder {
+  color: #646464;
+}
+/* line 468, main.sass */
+body #main #view .profile.detailed.light .chg-prof-pic {
+  color: #a2a2a2;
+}
+/* line 470, main.sass */
+body #main #view .profile.detailed.light .chg-prof-pic:hover {
+  color: #323232;
+}
+/* line 472, main.sass */
+body #main #view .profile.detailed.light legend {
+  color: #646464;
+}
+/* line 474, main.sass */
+body #main #view .profile.detailed.light .preview-edit {
+  color: #323232;
+}
+/* line 477, main.sass */
 body #main #view .profile.detailed.light .added h5, body #main #view .profile.detailed.light .added span {
   color: #505050;
 }
-/* line 243, main.sass */
+/* line 481, main.sass */
+body #main #view .profile.detailed.light .profile .model-edit input, body #main #view .profile.detailed.light .profile .model-view input {
+  color: #5a5a5a;
+}
+/* line 483, main.sass */
+body #main #view .profile.detailed.light .action {
+  padding-top: 0.4em;
+}
+/* line 485, main.sass */
+body #main #view .profile.detailed.light .action i {
+  color: white;
+  float: right;
+}
+/* line 488, main.sass */
+body #main #view .profile.detailed.light .action i.del {
+  color: #726f72;
+}
+/* line 490, main.sass */
+body #main #view .profile.detailed.light .action i.del:hover {
+  color: red;
+}
+/* line 492, main.sass */
+body #main #view .profile.detailed.light .action i.add {
+  margin-top: 0.2em;
+  color: #464646;
+}
+/* line 495, main.sass */
+body #main #view .profile.detailed.light .action i.add:hover {
+  color: green;
+}
+/* line 497, main.sass */
 body #main #view .profile.minimal {
   margin-top: 10em;
 }
-/* line 247, main.sass */
+/* line 501, main.sass */
 body #main #view .profile.minimal.dark .minimal-section i {
+  -webkit-transition: color 0.5s;
+  -moz-transition: color 0.5s;
+  transition: color 0.5s;
   color: #e6e6e6;
 }
-/* line 249, main.sass */
+/* line 506, main.sass */
+body #main #view .profile.minimal.dark .minimal-section i.icon-bolt:hover {
+  color: #ffad00;
+}
+/* line 508, main.sass */
+body #main #view .profile.minimal.dark .minimal-section i.icon-suitcase:hover {
+  color: #00d6ff;
+}
+/* line 510, main.sass */
+body #main #view .profile.minimal.dark .minimal-section i.icon-user:hover {
+  color: white;
+}
+/* line 512, main.sass */
+body #main #view .profile.minimal.dark .minimal-section i.icon-globe:hover {
+  color: green;
+}
+/* line 514, main.sass */
 body #main #view .profile.minimal.dark .minimal-section span {
   color: #c8c8c8;
 }
-/* line 252, main.sass */
-body #main #view .profile.minimal.dark .minimal-section:hover i {
-  color: #3fd1ff;
-}
-/* line 254, main.sass */
-body #main #view .profile.minimal.dark .minimal-section:hover span {
-  color: white;
-}
-/* line 258, main.sass */
+/* line 518, main.sass */
 body #main #view .profile.minimal.light .minimal-section i {
-  color: #323232;
+  -webkit-transition: color 0.5s;
+  -moz-transition: color 0.5s;
+  transition: color 0.5s;
+  color: #464646;
 }
-/* line 260, main.sass */
+/* line 523, main.sass */
+body #main #view .profile.minimal.light .minimal-section i.icon-bolt:hover {
+  color: #ffad00;
+}
+/* line 525, main.sass */
+body #main #view .profile.minimal.light .minimal-section i.icon-suitcase:hover {
+  color: #00d6ff;
+}
+/* line 527, main.sass */
+body #main #view .profile.minimal.light .minimal-section i.icon-user:hover {
+  color: #1e1e1e;
+}
+/* line 529, main.sass */
+body #main #view .profile.minimal.light .minimal-section i.icon-globe:hover {
+  color: green;
+}
+/* line 531, main.sass */
 body #main #view .profile.minimal.light .minimal-section span {
   color: #505050;
 }
-/* line 263, main.sass */
-body #main #view .profile.minimal.light .minimal-section:hover i {
-  color: #3fd1ff;
-}
-/* line 265, main.sass */
+/* line 534, main.sass */
 body #main #view .profile.minimal.light .minimal-section:hover span {
   color: #0a0a0a;
 }
-/* line 267, main.sass */
+/* line 536, main.sass */
 body #main #view .profile.minimal .profile-pic {
   margin-top: 4em;
+  height: 293px;
+  width: 293px;
 }
-/* line 269, main.sass */
+/* line 540, main.sass */
 body #main #view .profile.minimal .minimal-info {
   padding-top: 1em;
 }
-/* line 271, main.sass */
+/* line 542, main.sass */
 body #main #view .profile.minimal span {
   font-size: 1.8em;
   font-weight: 400;
 }
-/* line 274, main.sass */
+/* line 545, main.sass */
 body #main #view .profile.minimal .name {
   font-size: 2.5em;
   font-weight: 400;
 }
-/* line 277, main.sass */
+/* line 548, main.sass */
 body #main #view .profile.minimal p {
   margin-top: 4em;
   margin-bottom: 4em;

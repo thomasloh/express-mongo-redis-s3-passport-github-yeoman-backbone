@@ -53,15 +53,30 @@ define(['text!_page.html'], function(page_template) {
     },
 
     show: function(view) {
+      var _this = this;
+
+      // Set current view
       this._current.set(view);
-      // Put transition animation here
-      this.$('#container').empty().append(view.html());
-      // Event bindings, if any
+
+      // Load view's model first
       if (view.model) {
-        rivets.bind(view.$el, {model: view.model});
+        view.load(function() {
+          display.call(_this);
+        });
+      } else {
+        display.call(this);
+      }
+
+      function display() {
+        // Put transition animation here
+        this.$('#container').empty().append(view.html());
+        // Event bindings, if any
+        if (view.model) {
+          rivets.bind(view.$el, {model: view.model});
+        };
+        // Any postShows
+        view.postShow();
       };
-      // Any postShows
-      view.postShow();
     }
 
   });

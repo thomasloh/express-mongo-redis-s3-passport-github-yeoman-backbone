@@ -5,14 +5,22 @@ define(['profile'], function(Profile) {
       // precaution
       opts || (opts = {})
 
+      // api root
+      this.api_root = opts.api_root;
+
       // set url
       this.url = opts.api_root + '/p';
     },
-    retrieve: function(id) {
-      var model = this.get(id);
-      if (!model) {
-        this.add({id: id});
-        model = this.get(id);
+    retrieve: function(json) {
+      var model;
+      if (json.id) {
+        model = this.get(json.id);
+      } else {
+        model = this.where(json)[0];
+      }
+      if (!model && !json.id) {
+        this.add(json);
+        model = this.where(json)[0];
       };
       return model;
     }
