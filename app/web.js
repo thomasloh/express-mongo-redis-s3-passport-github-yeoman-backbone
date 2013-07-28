@@ -15,6 +15,17 @@ var express         = require('express'),
     GitHubStrategy  = require('passport-github').Strategy,
     _               = require('underscore');
 
+// var redis = require('redis-url').connect(process.env.REDISTOGO_URL);
+
+// var rtg, redis;
+// if (process.env.REDISTOGO_URL) {
+//   rtg   = require('url').parse(process.env.REDISTOGO_URL);
+//   redis = require('redis').createClient(rtg.port, rtg.hostname);
+//   redis.auth(rtg.auth.split(':')[1]);
+// } else {
+//   redis = require("redis").createClient()
+// }
+
 /*
  * ------------------------------
  * DATABASE CONFIGURATIONS
@@ -22,12 +33,12 @@ var express         = require('express'),
  */
 
 // connect
-mongoose.connect('mongodb://localhost/dp');
-// mongoose.connect('mongodb://nodejitsu:f2cc89ffe90579b27ec1e15aecf2e3d5@linus.mongohq.com:10004/nodejitsudb6383628270', {
-//   user: 'nodejitsu',
-//   pass: 'f2cc89ffe90579b27ec1e15aecf2e3d5'
-//   // server: 'linus.mongohq.com'
-// });
+var mongoUri = process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/dp';
+
+mongoose.connect(mongoUri);
+
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback() {
@@ -58,19 +69,6 @@ var profile_schema = mongoose.Schema({
   profile_pic : String
 });
 
-// experience = [{
-//   position: 'Software Engineer',
-//   company: 'Trapit'
-// }]
-
-// projects = [{
-//   name: 'Project',
-//   desc: 'Some description about the project',
-//   techs: [String]
-// }]
-
-// interest = [String]
-
 var Profile = mongoose.model('Profile', profile_schema);
 
 /*
@@ -78,6 +76,9 @@ var Profile = mongoose.model('Profile', profile_schema);
  * AUTHENTICATIONS
  * --------------------------------
  */
+
+ var ip = process.env.IP || 'http://localhost';
+ var port = process.env.PORT || config.port;
  var GITHUB_CLIENT_ID = "81d79776accbbad7f1c6"
  var GITHUB_CLIENT_SECRET = "9977e92222f72ae13dd96f759bb7932a60535ea4";
 
@@ -88,16 +89,17 @@ var Profile = mongoose.model('Profile', profile_schema);
  passport.deserializeUser(function(obj, done) {
    done(null, obj);
  });
-
+console.log(ip + ':' + port)
  passport.use(new GitHubStrategy({
      clientID: GITHUB_CLIENT_ID,
      clientSecret: GITHUB_CLIENT_SECRET,
-     callbackURL: "http://localhost:5000/auth/github/callback"
+     // callbackURL: "http://localhost/auth/github/callback"
+     callbackURL: ip + ':' + port + "/auth/github/callback"
    },
    function(accessToken, refreshToken, profile, done) {
      // asynchronous verification, for effect...
      process.nextTick(function () {
-       
+
        // To keep the example simple, the user's GitHub profile is returned to
        // represent the logged-in user.  In a typical application, you would want
        // to associate the GitHub account with a user record in your database,
@@ -115,8 +117,6 @@ var Profile = mongoose.model('Profile', profile_schema);
 
 var ap, app = express();
 
-var port = process.env.PORT || config.port;
-
 app.configure(function(){
   app.set('title', 'DP Server');
   app.set('port', port);
@@ -124,11 +124,11 @@ app.configure(function(){
   // app.set('main', __dirname + '/client/dist/index.html'); // prod
   app.set('main', __dirname + '/client/app/index.html'); // dev
   app.use(express.favicon());
-  app.use(express.logger('dev'));
+  // app.use(express.logger('dev'));
   app.use(express.compress());
+  app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.cookieParser());
   app.use(express.session({ store: new RedisStore, secret: 'oppa gangnam style!' , cookie: { secure: false, maxAge: 86400000 } }));
   // Initialize Passport!  Also use passport.session() middleware, to support
   // persistent login sessions (recommended).
@@ -142,11 +142,11 @@ app.configure(function(){
 ap = app.get('api_prefix');
 
 app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
 app.configure('production', function(){
-  app.use(express.errorHandler()); 
+  app.use(express.errorHandler());
 });
 
 /*
@@ -240,7 +240,8 @@ app.configure('production', function(){
 
  // Allow cors
  app.all('/*', function(req, res, next) {
-   res.header("Access-Control-Allow-Origin", "http://localhost:9000");
+   // res.header("Access-Control-Allow-Origin", "http://floating-basin-2975.herokuapp.com/");
+   res.header("Access-Control-Allow-Origin", ip + ':' + port);
    res.header("Access-Control-Allow-Credentials", true);
    res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Origin, Accept");
    res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
@@ -381,13 +382,16 @@ app.get('/auth/github',
 //   request.  If authentication fails, the user will be redirected back to the
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
-app.get('/auth/github/callback', 
+app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/' }),
   function(req, res) {
-
     var github_user = req.session.passport.user,
         github_id   = github_user.id;
 
+        console.log('hihihihih')
+    console.log(github_user)
+    console.log(github_id)
+    console.log('hihihihih')
     // Registers users if user doesnt exist already
     checksIfUserExists(github_id, function(profile) {
       if (!profile) {
@@ -447,12 +451,13 @@ app.get('/s3/cred/:type/:file', authenticate, function(req, res) {
     s3Policy = {
       "expiration": "2014-01-01T00:00:00Z",
       "conditions": [
-        { "bucket": "detaild.co" }, 
+        { "bucket": "detaild.co" },
         ["starts-with", "$key", "uploads/"],
-        { "acl": "public-read" }, 
-        { "success_action_redirect": "http://localhost:5000" }, 
+        { "acl": "public-read" },
+        // { "success_action_redirect": "http://localhost/" },
+        { "success_action_redirect": ip + ':' + port },
         ["starts-with", "$Content-Type", 'image/jpeg'],
-        ["content-length-range", 0, 2147483648], 
+        ["content-length-range", 0, 2147483648],
       ]
     };
     s3PolicyBase64 = new Buffer( JSON.stringify( s3Policy ) ).toString( 'base64' );
@@ -460,10 +465,11 @@ app.get('/s3/cred/:type/:file', authenticate, function(req, res) {
     s3PolicyBase64: s3PolicyBase64,
     s3Signature: crypto.createHmac( "sha1", "pOO1taO8t7b7AxXj0xPfiWt/BRqDEAya8tzxfBtO" ).update( s3PolicyBase64 ).digest( "base64" ),
     s3Key: "AKIAIL7TRH5L2QK4TEXQ",
-    s3Redirect: "http://localhost:5000",
+    // s3Redirect: "http://floating-basin-2975.herokuapp.com/",
+    s3Redirect: ip + ':' + port,
     s3Policy: s3Policy
   }
-    
+
     return s3Credentials;
   };
 

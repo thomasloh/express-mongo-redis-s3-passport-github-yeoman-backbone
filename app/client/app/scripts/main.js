@@ -53,7 +53,7 @@ require(['app'], function (App) {
     'use strict';
 
     $(function() {
-        
+
         // DP namespace
         window.DP = {};
 
@@ -62,6 +62,7 @@ require(['app'], function (App) {
 
         // Start app
         DP.app.start({
+            // api_root: 'http://floating-basin-2975.herokuapp.com/dp/api/v1'
             api_root: 'http://localhost:5000/dp/api/v1'
         });
 

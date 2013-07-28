@@ -144,14 +144,14 @@ module.exports = function (grunt) {
                 options: {
                     // `name` and `out` is set by grunt-usemin
                     baseUrl: 'app/scripts',
-                    optimize: 'none',
+                    optimize: 'uglify',
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
                     //generateSourceMaps: true,
                     // required to support SourceMaps
                     // http://requirejs.org/docs/errors.html#sourcemapcomments
                     preserveLicenseComments: false,
-                    useStrict: true,
+                    useStrict: false,
                     wrap: true,
                     //uglify2: {} // https://github.com/mishoo/UglifyJS2
                     mainConfigFile: 'app/scripts/main.js'

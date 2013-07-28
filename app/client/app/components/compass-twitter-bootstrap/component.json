@@ -1,0 +1,8 @@
+{
+  "name": "compass-twitter-bootstrap",
+  "version": "2.2.2",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vwall/compass-twitter-bootstrap.git"
+  }
+}

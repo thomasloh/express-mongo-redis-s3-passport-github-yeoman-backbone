@@ -50,7 +50,7 @@ define(['_base_view', 'text!view.html'], function(BaseView, view_template) {
       // $el caches
       this.$minimal     = this.$('.profile.minimal');
       this.$detailed    = this.$('.profile.detailed');
-      this.$d_btn       = this.$('.view-mode .detailed'); 
+      this.$d_btn       = this.$('.view-mode .detailed');
       this.$m_btn       = this.$('.view-mode .minimal');
       this.$overlay     = this.$('.background .overlay');
       this.$edit_p      = this.$('.edit-panel');
@@ -59,7 +59,7 @@ define(['_base_view', 'text!view.html'], function(BaseView, view_template) {
       this.$theme       = this.$('.theme');
       this.$bg          = this.$('.change-bg');
       this.$profile     = this.$('.profile');
-      this.$D_btn       = this.$('.theme .dark'); 
+      this.$D_btn       = this.$('.theme .dark');
       this.$L_btn       = this.$('.theme .light');
 
 
@@ -155,7 +155,7 @@ define(['_base_view', 'text!view.html'], function(BaseView, view_template) {
     },
 
     e_minimal: function(e) {
-      
+
       // Manage displays
       this.show(this.$minimal);
       this.hide(this.$detailed);
@@ -211,14 +211,14 @@ define(['_base_view', 'text!view.html'], function(BaseView, view_template) {
 
       // Manage views
       this.$('.model-edit').removeClass('model-edit').addClass('model-view');
-      
+
       // Manage btn views
       this.$('.icon-ok').hide();
       this.$('.icon-edit').show();
       this.$('.editing').show();
       this.$('.edit-ok').hide();
 
-      this.set('role', (this.get('position') ? this.get('position') + ', ' : '') + this.get('company'));
+      this.model.set('role', (this.model.get('position') ? this.model.get('position') + ', ' : '') + this.model.get('company'));
 
     },
 

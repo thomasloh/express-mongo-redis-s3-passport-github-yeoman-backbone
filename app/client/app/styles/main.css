@@ -1741,7 +1741,7 @@ blockquote p {
   /* line 372, ../components/foundation/scss/foundation/components/_type.scss */
   * {
     background: transparent !important;
-    color: black !important;
+    color: #000 !important;
     /* Black prints faster: h5bp.com/s */
     box-shadow: none !important;
     text-shadow: none !important;
@@ -1773,7 +1773,7 @@ blockquote p {
   /* line 391, ../components/foundation/scss/foundation/components/_type.scss */
   pre,
   blockquote {
-    border: 1px solid #999999;
+    border: 1px solid #999;
     page-break-inside: avoid;
   }
 
@@ -3811,7 +3811,7 @@ form.custom .custom.disabled {
   right: 0px;
   width: 11px;
   height: 14px;
-  border: solid 4px black;
+  border: solid 4px #000;
   border-top: none;
   border-bottom: none;
 }
@@ -3822,7 +3822,7 @@ form.custom .custom.disabled {
   width: 11px;
   height: 14px;
   border: solid 8px;
-  border-color: transparent transparent transparent black;
+  border-color: transparent transparent transparent #000;
 }
 /* line 111, ../components/foundation/scss/foundation/components/_orbit.scss */
 .orbit-container:hover .orbit-timer > span {
@@ -3859,11 +3859,11 @@ form.custom .custom.disabled {
 }
 /* line 138, ../components/foundation/scss/foundation/components/_orbit.scss */
 .orbit-container .orbit-prev > span {
-  border-color: transparent white transparent transparent;
+  border-color: transparent #fff transparent transparent;
 }
 /* line 139, ../components/foundation/scss/foundation/components/_orbit.scss */
 .orbit-container .orbit-prev:hover > span {
-  border-color: transparent #cccccc transparent transparent;
+  border-color: transparent #ccc transparent transparent;
 }
 /* line 141, ../components/foundation/scss/foundation/components/_orbit.scss */
 .orbit-container .orbit-next {
@@ -3871,13 +3871,13 @@ form.custom .custom.disabled {
 }
 /* line 142, ../components/foundation/scss/foundation/components/_orbit.scss */
 .orbit-container .orbit-next > span {
-  border-color: transparent transparent transparent white;
+  border-color: transparent transparent transparent #fff;
   left: 50%;
   margin-left: -8px;
 }
 /* line 147, ../components/foundation/scss/foundation/components/_orbit.scss */
 .orbit-container .orbit-next:hover > span {
-  border-color: transparent transparent transparent #cccccc;
+  border-color: transparent transparent transparent #ccc;
 }
 
 /* line 151, ../components/foundation/scss/foundation/components/_orbit.scss */
@@ -3895,7 +3895,7 @@ form.custom .custom.disabled {
   background: #fff;
   float: left;
   margin-right: 6px;
-  border: solid 2px black;
+  border: solid 2px #000;
   -webkit-border-radius: 1000px;
   border-radius: 1000px;
 }
@@ -4146,11 +4146,11 @@ form.custom .custom.disabled {
   text-decoration: none;
   font-size: 30px;
   font-weight: normal;
-  line-height: 0.5 !important;
+  line-height: .5 !important;
 }
 /* line 144, ../components/foundation/scss/foundation/components/_joyride.scss */
 .joyride-close-tip:hover, .joyride-close-tip:focus {
-  color: #eeeeee !important;
+  color: #eee !important;
 }
 
 /* line 147, ../components/foundation/scss/foundation/components/_joyride.scss */
@@ -7149,9 +7149,9 @@ body.unauth #unauthenticated h1 {
   top: 0;
   left: 1em;
   position: fixed;
-  font-weight: 700;
-  font-family: "museo-slab", serif;
-  color: white;
+  font-weight: 100;
+  font-family: "Open Sans", sans-serif;
+  color: #ff5151;
 }
 /* line 92, main.sass */
 body #main {
@@ -7421,15 +7421,15 @@ body #main #view .home {
 }
 /* line 283, main.sass */
 body #main #view .home.dark h1 {
-  font-weight: 700;
-  font-family: "museo-slab", serif;
-  color: #fafafa;
+  font-weight: 100;
+  font-family: "Open Sans", sans-serif;
+  color: #ff5151;
 }
 /* line 288, main.sass */
 body #main #view .home.light h1 {
-  font-weight: 700;
-  font-family: "museo-slab", serif;
-  color: #3c3c3c;
+  font-weight: 100;
+  font-family: "Open Sans", sans-serif;
+  color: #ff5151;
 }
 /* line 292, main.sass */
 body #main #view .theme {

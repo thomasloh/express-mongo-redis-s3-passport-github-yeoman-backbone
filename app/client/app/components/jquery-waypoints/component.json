@@ -1,0 +1,8 @@
+{
+  "name": "jquery-waypoints",
+  "version": "v2.0.2",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/imakewebthings/jquery-waypoints.git"
+  }
+}

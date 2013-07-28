@@ -1,6 +1,6 @@
 <div class="background" style="background: url('<%= bg %>');background-size: cover;">
   <div class="overlay <%= theme %> ">
-    
+
   </div>
 </div>
 
@@ -19,21 +19,22 @@
 
     <form id="aws-upload" action="https://detaild.co.s3.amazonaws.com/" method="post" enctype="multipart/form-data">
       <input type="hidden" name="key" value="uploads/${filename}">
-      <input id="awskey" type="hidden" name="AWSAccessKeyId" value="YOUR_AWS_ACCESS_KEY"> 
-      <input type="hidden" name="acl" value="public-read"> 
-      <input id="redir" type="hidden" name="success_action_redirect" value="http://localhost/">
+      <input id="awskey" type="hidden" name="AWSAccessKeyId" value="YOUR_AWS_ACCESS_KEY">
+      <input type="hidden" name="acl" value="public-read">
+      <input id="redir" type="hidden" name="success_action_redirect" value="http://floating-basin-2975.herokuapp.com/">
+      <!-- <input id="redir" type="hidden" name="success_action_redirect" value="http://localhost/"> -->
       <input id="policy" type="hidden" name="policy" value="YOUR_POLICY_DOCUMENT_BASE64_ENCODED">
       <input id="sig" type="hidden" name="signature" value="YOUR_CALCULATED_SIGNATURE">
       <input type="hidden" name="Content-Type" value="image/jpeg">
       <!-- Include any additional input fields here -->
 
       <!-- File to upload to S3:  -->
-      <input id="change-bg" name="file" type="file" style="visibility: hidden;"> 
-      <br> 
-      <input type="submit" value="Upload File to S3" style="visibility: hidden;"> 
+      <input id="change-bg" name="file" type="file" style="visibility: hidden;">
+      <br>
+      <input type="submit" value="Upload File to S3" style="visibility: hidden;">
     </form>
   </div>
-  
+
   <div class="signout <%= theme %> ">
     <a href="/logout" data-bypass>
       <i class="icon-signout icon-2x"></i>
@@ -84,7 +85,7 @@
       <!-- <span class="name" data-dp-text="model.name"></span> -->
 
     </div>
-    
+
   </div>
 
   <div class="row">
@@ -142,9 +143,9 @@
       </p>
 
     </div>
-    
+
   </div>
-  
+
 </div>
 
 <!-- Detailed -->
@@ -162,18 +163,19 @@
     </div>
     <form id="aws-upload-profile-pic" action="https://detaild.co.s3.amazonaws.com/" method="post" enctype="multipart/form-data" style="position: fixed; visibility: hidden;">
       <input type="hidden" name="key" value="uploads/${filename}">
-      <input id="awskey-p" type="hidden" name="AWSAccessKeyId" value="YOUR_AWS_ACCESS_KEY"> 
-      <input type="hidden" name="acl" value="public-read"> 
-      <input id="redir-p" type="hidden" name="success_action_redirect" value="http://localhost/">
+      <input id="awskey-p" type="hidden" name="AWSAccessKeyId" value="YOUR_AWS_ACCESS_KEY">
+      <input type="hidden" name="acl" value="public-read">
+      <input id="redir-p" type="hidden" name="success_action_redirect" value="http://floating-basin-2975.herokuapp.com/">
+      <!-- <input id="redir-p" type="hidden" name="success_action_redirect" value="http://localhost/"> -->
       <input id="policy-p" type="hidden" name="policy" value="YOUR_POLICY_DOCUMENT_BASE64_ENCODED">
       <input id="sig-p" type="hidden" name="signature" value="YOUR_CALCULATED_SIGNATURE">
       <input type="hidden" name="Content-Type" value="image/jpeg">
       <!-- Include any additional input fields here -->
 
       <!-- File to upload to S3:  -->
-      <input id="change-profile-pic" name="file" type="file" style="visibility: hidden;"> 
-      <br> 
-      <input type="submit" value="Upload File to S3" style="visibility: hidden;"> 
+      <input id="change-profile-pic" name="file" type="file" style="visibility: hidden;">
+      <br>
+      <input type="submit" value="Upload File to S3" style="visibility: hidden;">
     </form>
 
     <% } %>
@@ -287,7 +289,7 @@
           </div>
         </div>
       </p>
- -->      
+ -->
       <p>
         <div class="row minimal-section">
           <div class="large-3 columns icon-col">
@@ -316,7 +318,7 @@
           </div>
         </div>
       </p>
-      
+
     </div>
 
   </div>
@@ -338,7 +340,7 @@
         </div>
 
       </div>
-      
+
     </div>
     <div class="row exp-proj-int">
 
@@ -390,7 +392,7 @@
         </fieldset>
 
       </div>
-      
+
     </div>
 
     <div class="row">
@@ -442,7 +444,7 @@
         </fieldset>
 
       </div>
-      
+
     </div>
     <div class="row">
 
@@ -481,10 +483,10 @@
         </fieldset>
 
       </div>
-      
+
     </div>
 
   </div>
-  
+
 </div>
 

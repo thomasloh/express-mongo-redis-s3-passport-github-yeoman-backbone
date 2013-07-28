@@ -1,0 +1,17 @@
+{
+  "name": "jquery-transition",
+  "version": "0.0.0",
+  "dependencies": {
+    "jquery": "~1.5.2"
+  },
+  "gitHead": "45f9cb39fa698325c520a9ee51ddcef6d7a4c1f7",
+  "readme": "\nCSS transitions plugin for jQuery\n=====\n\n* Provides CSS transitions with an API similar to `jQuery.animate`\n* Falls back to `jQuery.animate` for browsers that don't support CSS transitions\n* Vendor prefixes not required\n\n\nAPI\n==================\n\n    .transition( properties [, duration] [, easing] [, complete] )\n\n* **properties**\n    A map of CSS properties that the animation will move toward.\n* **duration**\n    A string or number determining how long the animation will run.\n* **easing** \n    A string or object* indicating which easing function to use for the transition.  \n    Different easing value can be specified for CSS transition and the fallback `jQuery.animate`  \n    e.g. `{ transition: 'cubic-bezier(0,0,0.58,1)', animate: 'swing' }`\n* **complete**\n    A function to call once the animation is complete.\n\n\nExample\n==================\n\n    $( 'div' ).transition({ \n        'margin-top': 100,\n        'width': 300,\n        'transform': 'rotate(360deg)'\n    }, 'slow', 'ease-in-out', function () {\n        console.log( 'Complete!' );\n    });\n\n\nCaveats\n==================\nDue to the nature of CSS transitions, it is not possible to recreate all the features of regular jQuery animation.\n( See http://ejohn.org/blog/css-animations-and-javascript/ )\n\nRelative property values (e.g.'+=100') are not supported when using jQuery version < 1.6",
+  "readmeFilename": "README.md",
+  "_id": "jquery.transition@0.9.0",
+  "description": "CSS transitions plugin for jQuery =====",
+  "commit": "45f9cb39fa698325c520a9ee51ddcef6d7a4c1f7",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/peteboere/jquery-transition.git"
+  }
+}
