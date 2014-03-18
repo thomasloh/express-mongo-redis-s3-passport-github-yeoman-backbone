@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -79,8 +78,9 @@ var Profile = mongoose.model('Profile', profile_schema);
 
  var ip = process.env.IP || 'http://localhost';
  var port = process.env.PORT || config.port;
- var GITHUB_CLIENT_ID = "81d79776accbbad7f1c6"
- var GITHUB_CLIENT_SECRET = "9977e92222f72ae13dd96f759bb7932a60535ea4";
+ 
+//GITHUB_CLIENT_ID
+//GITHUB_CLIENT_SECRET
 
  passport.serializeUser(function(user, done) {
    done(null, user);
@@ -463,8 +463,8 @@ app.get('/s3/cred/:type/:file', authenticate, function(req, res) {
     s3PolicyBase64 = new Buffer( JSON.stringify( s3Policy ) ).toString( 'base64' );
   s3Credentials = {
     s3PolicyBase64: s3PolicyBase64,
-    s3Signature: crypto.createHmac( "sha1", "pOO1taO8t7b7AxXj0xPfiWt/BRqDEAya8tzxfBtO" ).update( s3PolicyBase64 ).digest( "base64" ),
-    s3Key: "AKIAIL7TRH5L2QK4TEXQ",
+    // s3signature
+    // s3key
     // s3Redirect: "http://floating-basin-2975.herokuapp.com/",
     s3Redirect: ip + ':' + port,
     s3Policy: s3Policy
